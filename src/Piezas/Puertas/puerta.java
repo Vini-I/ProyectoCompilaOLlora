@@ -8,7 +8,7 @@ package Piezas.Puertas;
  *
  * @author llean
  */
-public class puerta {
+public class Puerta {
     private boolean abierta;
     private boolean bloqueada;
 
@@ -28,7 +28,7 @@ public class puerta {
         this.bloqueada = bloqueada;
     }
 
-    public puerta() {
+    public Puerta() {
         this.abierta = false;
         this.bloqueada = false;
     }
