@@ -4,13 +4,14 @@
  */
 package Piezas.Radio;
 
+import Piezas.Cambiable;
 import Piezas.Encendible;
 
 /**
  *
  * @author rodol
  */
-public class Radio implements Encendible {
+public class Radio implements Encendible, Cambiable {
     
     private boolean encendida;
     private int indiceEstaciones;
@@ -27,12 +28,6 @@ public class Radio implements Encendible {
 
     public int getIndiceEstaciones() {
         return indiceEstaciones;
-    }
-
-    public void setIndiceEstaciones(int indiceEstaciones) {
-        if (indiceEstaciones >= 0 && indiceEstaciones < estacionesLista.length) {
-            this.indiceEstaciones = indiceEstaciones;
-        }
     }
     
     public String getNombreEstaciones(){
@@ -54,6 +49,13 @@ public class Radio implements Encendible {
     public void apagar() {
         this.encendida = false;
         this.indiceEstaciones = 0;
+    }
+    
+    @Override
+    public void cambiar(int indiceEstaciones){
+        if (indiceEstaciones >= 0 && indiceEstaciones < estacionesLista.length) {
+            this.indiceEstaciones = indiceEstaciones;
+        }
     }
     
     public void activarBluetooth(){
