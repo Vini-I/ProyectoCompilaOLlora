@@ -4,13 +4,14 @@
  */
 package Piezas.Climatizacion;
 
+import Piezas.Cambiable;
 import Piezas.Encendible;
 
 /**
  *
  * @author rodol
  */
-public class Climatizacion implements Encendible {
+public class Climatizacion implements Encendible, Cambiable {
     
     private boolean encendido;
     private int limiteTemperatura;
@@ -35,12 +36,6 @@ public class Climatizacion implements Encendible {
             this.limiteTemperatura = limiteTemperatura;
         }
     }
-    
-    public void setIndiceVelocidad(int indiceVelocidad) {
-        if (indiceVelocidad >= 0 && indiceVelocidad < velocidadesLista.length) {
-            this.indiceVelocidad = indiceVelocidad;
-        }
-    }
 
     public Climatizacion() {
         this.encendido = false;
@@ -57,6 +52,13 @@ public class Climatizacion implements Encendible {
     public void apagar() {
         this.encendido = false;
         this.indiceVelocidad = 0;
+    }
+    
+    @Override
+    public void cambiar(int indiceVelocidad){
+        if (indiceVelocidad >= 0 && indiceVelocidad < velocidadesLista.length) {
+            this.indiceVelocidad = indiceVelocidad;
+        }
     }
     
     public String getNombreVelocidades(){
