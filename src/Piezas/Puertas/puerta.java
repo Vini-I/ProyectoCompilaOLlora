@@ -20,14 +20,6 @@ public class Puerta {
         return bloqueada;
     }
 
-    public void setAbierta(boolean abierta) {
-        this.abierta = abierta;
-    }
-
-    public void setBloqueada(boolean bloqueada) {
-        this.bloqueada = bloqueada;
-    }
-
     public Puerta() {
         this.abierta = false;
         this.bloqueada = false;

@@ -20,15 +20,8 @@ public class Alarma {
         return sonando;
     }
 
-    public void setArmada(boolean armada) {
-        this.armada = armada;
-    }
 
-    public void setSonando(boolean sonando) {
-        this.sonando = sonando;
-    }
-
-    public Alarma(boolean armada, boolean sonando) {
+    public Alarma() {
         this.armada = false;
         this.sonando = false;
     }
