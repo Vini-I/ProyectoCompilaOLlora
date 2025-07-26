@@ -4,26 +4,50 @@
  */
 package Piezas.Parabrisas;
 
+import Piezas.Encendible;
+
 /**
  *
  * @author rodol
  */
-public class LimpiaParabrisas {
+public class LimpiaParabrisas implements Encendible {
     
-    private VelocidadLimpiaParabrisas velocidad;
+    private static final String[] velocidadesLista = {"Apagado", "Baja", "Media", "Alta"};
+    private int indiceVelocidad;
+    private boolean encendido;
 
-    public VelocidadLimpiaParabrisas getVelocidad() {
-        return velocidad;
+    public boolean isEncendido() {
+        return encendido;
     }
 
-    public void setVelocidad(VelocidadLimpiaParabrisas velocidad) {
-        this.velocidad = velocidad;
+    public int getIndiceVelocidad() {
+        return indiceVelocidad;
+    }
+
+    public void setIndiceVelocidad(int indiceVelocidad) {
+        if (indiceVelocidad >= 0 && indiceVelocidad < velocidadesLista.length) {
+            this.indiceVelocidad = indiceVelocidad;
+        }
+    }
+    
+    public String getNombreVelocidad(){
+        return velocidadesLista[indiceVelocidad];
     }
 
     public LimpiaParabrisas() {
-        this.velocidad = VelocidadLimpiaParabrisas.APAGADO;
+        this.indiceVelocidad = 0;
+        this.encendido = false;
     }
 
-   
+    @Override
+    public void encender() {
+        this.encendido = true;
+    }
+
+    @Override
+    public void apagar() {
+        this.encendido = false;
+        this.indiceVelocidad = 0;
+    }
     
 }
