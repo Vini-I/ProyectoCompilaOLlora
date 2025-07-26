@@ -10,6 +10,6 @@ package Piezas;
  */
 public interface Cambiable {
     
-    public int cambiar(int indice);
+    public void cambiar(int indice);
     
 }
