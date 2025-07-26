@@ -20,7 +20,6 @@ public class LuzCarro extends Luz {
         this.intensidadLuz = false;
     }
     
-    
     public void cambiarIntensidad(){
         if (this.intensidadLuz){
             this.intensidadLuz = false;
