@@ -13,24 +13,35 @@ import Piezas.Encendible;
 public class Radio implements Encendible {
     
     private boolean encendida;
-    private String[] estaciones;
+    private int indiceEstaciones;
+    private static final String[] estacionesLista = {"Desconectado", "870 AM", "91.5 FM","93.9 FM"};
     private boolean bluetoothActivo;
 
     public boolean isEncendida() {
         return encendida;
     }
-
-    public String[] getEstaciones() {
-        return estaciones;
-    }
-
+    
     public boolean isBluetoothActivo() {
         return bluetoothActivo;
     }
 
+    public int getIndiceEstaciones() {
+        return indiceEstaciones;
+    }
+
+    public void setIndiceEstaciones(int indiceEstaciones) {
+        if (indiceEstaciones >= 0 && indiceEstaciones < estacionesLista.length) {
+            this.indiceEstaciones = indiceEstaciones;
+        }
+    }
+    
+    public String getNombreEstaciones(){
+        return estacionesLista[indiceEstaciones];
+    }
+    
     public Radio() {
-        this.estaciones = new String[] {"Desconectado", "870 AM", "91.5 FM","93.9 FM"};
         this.encendida = false;
+        this.indiceEstaciones = 0;
         this.bluetoothActivo = false;
     }
 
@@ -42,6 +53,7 @@ public class Radio implements Encendible {
     @Override
     public void apagar() {
         this.encendida = false;
+        this.indiceEstaciones = 0;
     }
     
     public void activarBluetooth(){
@@ -50,12 +62,5 @@ public class Radio implements Encendible {
     
     public void desactivarBluetooth(){
         this.bluetoothActivo = false;
-    }
-    
-    public String getIndiceDeEstaciones(int indice) {
-        if (indice >= 0 && indice < estaciones.length) {
-            return estaciones[indice];
-        }
-        return null;
     }
 }
