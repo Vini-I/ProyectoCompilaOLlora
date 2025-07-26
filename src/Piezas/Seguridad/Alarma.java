@@ -20,7 +20,6 @@ public class Alarma {
         return sonando;
     }
 
-
     public Alarma() {
         this.armada = false;
         this.sonando = false;
