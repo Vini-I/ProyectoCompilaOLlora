@@ -29,6 +29,8 @@ public class IFrmCamaraReversa extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
+        setPreferredSize(new java.awt.Dimension(480, 360));
+
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/yotota.png"))); // NOI18N
         jLabel1.setOpaque(true);

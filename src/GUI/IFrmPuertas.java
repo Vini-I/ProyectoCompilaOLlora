@@ -26,74 +26,76 @@ public class IFrmPuertas extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        lblAlarmaOn = new javax.swing.JLabel();
+        lblAlarmaOff = new javax.swing.JLabel();
+        lblLuzOn = new javax.swing.JLabel();
+        lblLuzOff = new javax.swing.JLabel();
+        lblPuertas = new javax.swing.JLabel();
+        btnLuzToggle = new javax.swing.JButton();
+        btnBloquear = new javax.swing.JToggleButton();
+        btnAlarma = new javax.swing.JButton();
+        btnCarroOn = new javax.swing.JButton();
 
+        setPreferredSize(new java.awt.Dimension(384, 360));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
+        lblAlarmaOn.setBackground(new java.awt.Color(255, 0, 0));
+        lblAlarmaOn.setOpaque(true);
+        getContentPane().add(lblAlarmaOn, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 170, 50));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 40, Short.MAX_VALUE)
-        );
+        lblAlarmaOff.setBackground(new java.awt.Color(153, 0, 0));
+        lblAlarmaOff.setOpaque(true);
+        getContentPane().add(lblAlarmaOff, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 170, 50));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 40));
+        lblLuzOn.setBackground(new java.awt.Color(255, 255, 255));
+        lblLuzOn.setOpaque(true);
+        getContentPane().add(lblLuzOn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 170, 50));
 
-        jPanel2.setBackground(new java.awt.Color(255, 0, 0));
-        jPanel2.setForeground(new java.awt.Color(255, 255, 255));
+        lblLuzOff.setBackground(new java.awt.Color(204, 204, 204));
+        lblLuzOff.setOpaque(true);
+        getContentPane().add(lblLuzOff, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 170, 50));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 40, Short.MAX_VALUE)
-        );
+        lblPuertas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/carClosedDoors.png"))); // NOI18N
+        getContentPane().add(lblPuertas, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, -1, 200));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, -1, 40));
+        btnLuzToggle.setBackground(new java.awt.Color(153, 153, 153));
+        btnLuzToggle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/luzTecho.png"))); // NOI18N
+        getContentPane().add(btnLuzToggle, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 90, 50));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/carClosedDoors.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
+        btnBloquear.setBackground(new java.awt.Color(153, 153, 153));
+        btnBloquear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/candadoCerrado.png"))); // NOI18N
+        getContentPane().add(btnBloquear, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 260, 80, 50));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/botonEncendido.png"))); // NOI18N
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, 50, 40));
+        btnAlarma.setBackground(new java.awt.Color(153, 153, 153));
+        btnAlarma.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/alarma.png"))); // NOI18N
+        getContentPane().add(btnAlarma, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, 80, 50));
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/luzTecho.png"))); // NOI18N
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 50, 40));
-
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/alarma.png"))); // NOI18N
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 50, 40));
-
-        jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/candadoCerrado.png"))); // NOI18N
-        getContentPane().add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 50, 40));
+        btnCarroOn.setBackground(new java.awt.Color(153, 153, 153));
+        btnCarroOn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/botonEncendido.png"))); // NOI18N
+        btnCarroOn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCarroOnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnCarroOn, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 260, 90, 50));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCarroOnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarroOnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCarroOnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JButton btnAlarma;
+    private javax.swing.JToggleButton btnBloquear;
+    private javax.swing.JButton btnCarroOn;
+    private javax.swing.JButton btnLuzToggle;
+    private javax.swing.JLabel lblAlarmaOff;
+    private javax.swing.JLabel lblAlarmaOn;
+    private javax.swing.JLabel lblLuzOff;
+    private javax.swing.JLabel lblLuzOn;
+    private javax.swing.JLabel lblPuertas;
     // End of variables declaration//GEN-END:variables
 }
