@@ -40,7 +40,7 @@ public class CajaCambios {
     }
 
     public double calcularVelocidad(int rpm) {
-        if (marchaActual == 1 || relaciones[marchaActual] == 1) return 0.0;
+        if (marchaActual == 1) return 0.0;
 
         double relacionTotal = relaciones[marchaActual] * relacionFinal;
 
