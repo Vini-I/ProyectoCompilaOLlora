@@ -43,14 +43,11 @@ public class IFrmDash extends javax.swing.JInternalFrame {
             
             int rpm = motor.getRpm();
             
-            combustible.consumir(rpm, motor.getCc(), 0.01);
-            prgBarNvlCombustible.setValue(combustible.getPorcentajeActual());
-            
             double angulo = mapearRPMaAngulo(rpm, 0, 8000);
             
             rotarAguja(lblRpmNeedle, angulo);
             
-            kilometraje.actualizarInfo(rpm, 0.01);
+            kilometraje.actualizarInfo(rpm, 0.001);
             
             int velocidad = kilometraje.getVelocidad();
             lblVelocidad.setText(velocidad + "km/h");
@@ -60,10 +57,16 @@ public class IFrmDash extends javax.swing.JInternalFrame {
             
             int km = (int) (kilometraje.getDistanciaKm());
             lblKm.setText(String.format("%05d", km));
+            
+            combustible.consumir(rpm, motor.getCc(), 250);
+            prgBarNvlCombustible.setValue(combustible.getPorcentajeActual());
+            prgBarNvlCombustible.setStringPainted(true);
+            prgBarNvlCombustible.setString(combustible.getPorcentajeActual() + "%");
         });
         
-        temporizador.start();
+        prgBarNvlCombustible.setValue(combustible.getPorcentajeActual());
         motor.encender();
+        temporizador.start();
     }
     
     public void rotarAguja(JLabel lbl, double anguloGrados) {
