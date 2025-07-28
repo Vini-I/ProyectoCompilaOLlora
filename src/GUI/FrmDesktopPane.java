@@ -11,6 +11,7 @@ package GUI;
 public class FrmDesktopPane extends javax.swing.JFrame {
 private IFrmPuertas puerta;
 private IFrmRadioClimatizacion radio;
+private IFrmCamaraReversa reversa;
     /**
      * Creates new form FrmDesktopPane
      */
@@ -20,6 +21,10 @@ private IFrmRadioClimatizacion radio;
         puerta = new IFrmPuertas();
         this.Base.add(puerta);
         puerta.setVisible(true);
+        
+        reversa = new IFrmCamaraReversa();
+        this.Base.add(reversa);
+        reversa.setVisible(true);
     }
 
     /**

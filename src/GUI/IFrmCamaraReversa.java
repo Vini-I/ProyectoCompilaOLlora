@@ -3,18 +3,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package GUI;
-
+import Piezas.Sensores.SensorReversa;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
+import javax.swing.Timer;
 /**
  *
  * @author llean
  */
 public class IFrmCamaraReversa extends javax.swing.JInternalFrame {
-
+SensorReversa reversa;
+private int segundo = 3;
     /**
      * Creates new form IFrmCamaraReversa
      */
     public IFrmCamaraReversa() {
         initComponents();
+        reversa = new SensorReversa();
     }
 
     /**
@@ -26,52 +33,93 @@ public class IFrmCamaraReversa extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblCamara = new javax.swing.JLabel();
+        lblStop = new javax.swing.JLabel();
+        btnReversa = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(480, 360));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/yotota.png"))); // NOI18N
-        jLabel1.setOpaque(true);
+        lblCamara.setBackground(new java.awt.Color(255, 255, 255));
+        lblCamara.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/yotota.png"))); // NOI18N
+        lblCamara.setOpaque(true);
+        getContentPane().add(lblCamara, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 22, -1, -1));
 
-        jLabel2.setBackground(new java.awt.Color(204, 0, 0));
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Stop!");
-        jLabel2.setOpaque(true);
+        lblStop.setBackground(new java.awt.Color(153, 0, 0));
+        lblStop.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        lblStop.setForeground(new java.awt.Color(255, 255, 255));
+        lblStop.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblStop.setText("Stop!");
+        lblStop.setEnabled(false);
+        lblStop.setOpaque(true);
+        getContentPane().add(lblStop, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 260, 110, 50));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(170, 170, 170)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(35, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        btnReversa.setBackground(new java.awt.Color(153, 153, 153));
+        btnReversa.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnReversa.setForeground(new java.awt.Color(0, 0, 0));
+        btnReversa.setText("Reversa");
+        btnReversa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReversaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnReversa, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, 110, 48));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+            Timer timer = new Timer (1000, new ActionListener (){
+            public void actionPerformed(ActionEvent e){
+            contador();
+            
+            }
+            });
+    
+         private void contador() {
+             segundo--;
+             if(segundo == 0){
+                reversa.hayPersona();
+                 if (reversa.isPersonaDetectada()) {
+                ImageIcon icono2 = new ImageIcon(getClass().getResource("/Iconos/camaraReversaObstruida.png"));
+                lblCamara.setIcon(icono2);
+                lblStop.setEnabled(true);
+                lblStop.setBackground(Color.red);
+                timer.stop();
+            }
+             }
+        }
+    
+    private void btnReversaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReversaActionPerformed
+        if(!reversa.isActivo()){
+            ImageIcon icono = new ImageIcon(getClass().getResource("/Iconos/camaraReversaLibre.png"));
+            lblCamara.setIcon(icono);
+            reversa.iniciarSensor();
+            
+            timer.start();
+            
+       
+            
+        } else {
+             ImageIcon icono = new ImageIcon(getClass().getResource("/Iconos/yotota.png"));
+            lblCamara.setIcon(icono);
+            reversa.detenerSensor();
+            reversa.noHayPersona();
+            lblStop.setEnabled(false);
+             Color color = new Color(76, 0, 0);
+             lblStop.setBackground(color);
+             segundo = 3;
+        }
+        
+           
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnReversaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton btnReversa;
+    private javax.swing.JLabel lblCamara;
+    private javax.swing.JLabel lblStop;
     // End of variables declaration//GEN-END:variables
 }
