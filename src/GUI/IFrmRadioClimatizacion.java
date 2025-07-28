@@ -255,6 +255,7 @@ public class IFrmRadioClimatizacion extends javax.swing.JInternalFrame {
             btnBluetooth.setIcon(iconoBluetoothOn);
             btnBluetooth.setSelected(false);
             btnBluetooth.setEnabled(radio.isEncendida());
+            rbtnBluetoothEstado.setVisible(radio.isBluetoothActivo());
             btnAMOn.setEnabled(radio.isEncendida());
             btnFMOn.setEnabled(radio.isEncendida());
             txtRadio.setText(radio.getNombreEstaciones());
