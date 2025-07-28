@@ -9,6 +9,7 @@ package Piezas.Motor;
  * @author Brwni
  */
 public class Motor {
+    private boolean acelerando;
     private final int cc;
     private boolean encendido;
     private int rpm;
@@ -36,21 +37,22 @@ public class Motor {
         }
     }
 
-    public void acelerar() {
-        if (encendido && rpm < RPM_MAX) {
-            rpm += 300;
-            if (rpm > RPM_MAX) rpm = RPM_MAX;
-        }
+    public void actualizarRPM() {
+    if (!encendido) {
+        rpm = 0;
+        return;
     }
 
-    public void desacelerar() {
-        if (encendido && rpm > RPM_MIN) {
-            rpm -= 200;
-            if (rpm < RPM_MIN) rpm = RPM_MIN;
-        }
+    if (acelerando && rpm < RPM_MAX) {
+        rpm += 300;
+        if (rpm > RPM_MAX) rpm = RPM_MAX;
+    } else if (!acelerando && rpm > RPM_MIN) {
+        rpm -= 200;
+        if (rpm < RPM_MIN) rpm = RPM_MIN;
     }
+}
 
-    public int getRPM() {
+    public int getRpm() {
         if (encendido) {
             return rpm;
         } else {
@@ -58,11 +60,31 @@ public class Motor {
         }
     }
 
+    public int getCc() {
+        return cc;
+    }
+
+    public int getRPM_MAX() {
+        return RPM_MAX;
+    }
+
+    public int getRPM_MIN() {
+        return RPM_MIN;
+    }
+    
+    
+    
+    public void setAcelerando(boolean valor) {
+        this.acelerando = valor;
+    }
+
+    public boolean isAcelerando() {
+        return acelerando;
+    }
+
     public boolean isEncendido() {
         return encendido;
     }
-
-    public int getCC() {
-        return cc;
-    }
+    
+    
 }
