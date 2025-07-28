@@ -9,12 +9,17 @@ package GUI;
  * @author Brwni
  */
 public class FrmDesktopPane extends javax.swing.JFrame {
-
+private IFrmPuertas puerta;
+private IFrmRadioClimatizacion radio;
     /**
      * Creates new form FrmDesktopPane
      */
     public FrmDesktopPane() {
         initComponents();
+        
+        puerta = new IFrmPuertas();
+        this.Base.add(puerta);
+        puerta.setVisible(true);
     }
 
     /**
