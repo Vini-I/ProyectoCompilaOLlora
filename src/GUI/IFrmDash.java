@@ -4,17 +4,85 @@
  */
 package GUI;
 
+import Piezas.Motor.Kilometraje;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.Timer;
+import Piezas.Motor.Motor;
+
 /**
  *
  * @author Brwni
  */
 public class IFrmDash extends javax.swing.JInternalFrame {
-
+    
+    private final Image agujaOriginal;
+    private final Motor motor;
+    private Timer temporizador;
+    private Kilometraje kilometraje;
     /**
      * Creates new form IFrmDash
      */
     public IFrmDash() {
         initComponents();
+        agujaOriginal = new ImageIcon(getClass().getResource("/Iconos/rpmNeedle.png")).getImage();
+        motor = new Motor(2000);
+        kilometraje = new Kilometraje();
+        this.temporizador = new Timer(10, e -> {
+            motor.actualizarRPM();
+            if (motor.isEncendido()) {
+                int rpm = motor.getRPM_MIN();
+            }
+            
+            int rpm = motor.getRpm();
+            
+            double angulo = mapearRPMaAngulo(rpm, 0, 8000);
+            
+            rotarAguja(lblRpmNeedle, angulo);
+            
+            kilometraje.actualizarInfo(rpm, 0.01);
+            
+            int velocidad = kilometraje.getVelocidad();
+            lblVelocidad.setText(velocidad + " km/h");
+            
+            int metros = (int) (kilometraje.getDistanciaMetros() / 100);
+            lblMetros.setText(Integer.toString(metros));
+            
+            int km = (int) (kilometraje.getDistanciaKm());
+            lblKm.setText(String.format("%05d", km));
+        });
+        
+        temporizador.start();
+        motor.encender();
+    }
+    
+    public void rotarAguja(JLabel lbl, double anguloGrados) {
+        int w = agujaOriginal.getWidth(null);
+        int h = agujaOriginal.getHeight(null);
+
+        BufferedImage rotada = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2 = rotada.createGraphics();
+
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        double pivoteX = 125;
+        double pivoteY = 124;
+    
+        g2.rotate(Math.toRadians(anguloGrados), pivoteX, pivoteY);
+        g2.drawImage(agujaOriginal, 0, 0, null);
+        g2.dispose();
+
+        lbl.setIcon(new ImageIcon(rotada));
+    }
+    
+    public double mapearRPMaAngulo(double rpm, double inMin, double inMax) {
+        double outMin = -157;
+        double outMax = 72;
+        return (rpm - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
     }
 
     /**
@@ -27,174 +95,199 @@ public class IFrmDash extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         panelOdometro = new javax.swing.JPanel();
-        nvlCombustible = new javax.swing.JProgressBar();
-        textCombustible = new javax.swing.JLabel();
-        textKm = new javax.swing.JLabel();
-        kmBackground = new javax.swing.JPanel();
-        kilometraje = new javax.swing.JLabel();
-        mBackground = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        prgBarNvlCombustible = new javax.swing.JProgressBar();
+        lblCombustible = new javax.swing.JLabel();
+        lblTextKm = new javax.swing.JLabel();
+        panelKm = new javax.swing.JPanel();
+        lblKm = new javax.swing.JLabel();
+        panelMetros = new javax.swing.JPanel();
+        lblMetros = new javax.swing.JLabel();
         panelVelocimetro = new javax.swing.JPanel();
-        Velocimetro = new javax.swing.JLabel();
-        izquierdaOn = new javax.swing.JLabel();
-        derechaOn = new javax.swing.JLabel();
-        luzBaja = new javax.swing.JLabel();
-        luzAlta = new javax.swing.JLabel();
-        parking = new javax.swing.JLabel();
-        seatbeltD = new javax.swing.JLabel();
-        seatbeltP = new javax.swing.JLabel();
-        wsWiperSelector = new javax.swing.JSlider();
-        wWIcon = new javax.swing.JLabel();
-        rpmNeedle = new javax.swing.JLabel();
-        rpmGauge = new javax.swing.JLabel();
+        lblVelocidad = new javax.swing.JLabel();
+        lblIzquierdaOn = new javax.swing.JLabel();
+        lblDerechaOn = new javax.swing.JLabel();
+        lblLuzBaja = new javax.swing.JLabel();
+        lblLuzAlta = new javax.swing.JLabel();
+        lblParking = new javax.swing.JLabel();
+        lblSeatbeltD = new javax.swing.JLabel();
+        lblSeatbeltP = new javax.swing.JLabel();
+        sliderWiperSelector = new javax.swing.JSlider();
+        lblWindshieldIcon = new javax.swing.JLabel();
+        lblRpmNeedle = new javax.swing.JLabel();
+        lblRpmGauge = new javax.swing.JLabel();
+        btnAcelerador = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(51, 51, 51));
+        setBorder(null);
+        setForeground(java.awt.Color.darkGray);
         setMinimumSize(new java.awt.Dimension(624, 360));
+        setOpaque(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelOdometro.setBackground(new java.awt.Color(204, 204, 204));
         panelOdometro.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        panelOdometro.add(nvlCombustible, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 298, 29));
+        panelOdometro.add(prgBarNvlCombustible, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 298, 29));
 
-        textCombustible.setFont(new java.awt.Font("OCR A Extended", 0, 24)); // NOI18N
-        textCombustible.setForeground(new java.awt.Color(0, 0, 0));
-        textCombustible.setText("Combustible");
-        panelOdometro.add(textCombustible, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, -1, -1));
+        lblCombustible.setFont(new java.awt.Font("OCR A Extended", 0, 24)); // NOI18N
+        lblCombustible.setForeground(new java.awt.Color(0, 0, 0));
+        lblCombustible.setText("Combustible");
+        panelOdometro.add(lblCombustible, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, -1, -1));
 
-        textKm.setFont(new java.awt.Font("OCR A Extended", 0, 18)); // NOI18N
-        textKm.setForeground(new java.awt.Color(0, 0, 0));
-        textKm.setText("Km recorridos");
-        panelOdometro.add(textKm, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, -1, 20));
+        lblTextKm.setFont(new java.awt.Font("OCR A Extended", 0, 18)); // NOI18N
+        lblTextKm.setForeground(new java.awt.Color(0, 0, 0));
+        lblTextKm.setText("Km recorridos");
+        panelOdometro.add(lblTextKm, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, -1, 20));
 
-        kmBackground.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelKm.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        kilometraje.setFont(new java.awt.Font("OCR A Extended", 0, 48)); // NOI18N
-        kilometraje.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        kilometraje.setText("000000");
-        kmBackground.add(kilometraje, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, -1, -1));
+        lblKm.setFont(new java.awt.Font("OCR A Extended", 0, 48)); // NOI18N
+        lblKm.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblKm.setText("000000");
+        panelKm.add(lblKm, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, -1, -1));
 
-        panelOdometro.add(kmBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 250, 50));
+        panelOdometro.add(panelKm, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 250, 50));
 
-        mBackground.setBackground(new java.awt.Color(153, 153, 153));
+        panelMetros.setBackground(new java.awt.Color(153, 153, 153));
 
-        jLabel1.setFont(new java.awt.Font("OCR A Extended", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("0");
+        lblMetros.setFont(new java.awt.Font("OCR A Extended", 0, 24)); // NOI18N
+        lblMetros.setForeground(new java.awt.Color(0, 0, 0));
+        lblMetros.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblMetros.setText("0");
 
-        javax.swing.GroupLayout mBackgroundLayout = new javax.swing.GroupLayout(mBackground);
-        mBackground.setLayout(mBackgroundLayout);
-        mBackgroundLayout.setHorizontalGroup(
-            mBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mBackgroundLayout.createSequentialGroup()
+        javax.swing.GroupLayout panelMetrosLayout = new javax.swing.GroupLayout(panelMetros);
+        panelMetros.setLayout(panelMetrosLayout);
+        panelMetrosLayout.setHorizontalGroup(
+            panelMetrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelMetrosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                .addComponent(lblMetros, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        mBackgroundLayout.setVerticalGroup(
-            mBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mBackgroundLayout.createSequentialGroup()
+        panelMetrosLayout.setVerticalGroup(
+            panelMetrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelMetrosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(lblMetros)
                 .addContainerGap(8, Short.MAX_VALUE))
         );
 
-        panelOdometro.add(mBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, 40, 40));
+        panelOdometro.add(panelMetros, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, 40, 40));
 
         getContentPane().add(panelOdometro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 310, 160));
 
         panelVelocimetro.setBackground(new java.awt.Color(204, 204, 204));
         panelVelocimetro.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Velocimetro.setFont(new java.awt.Font("OCR A Extended", 0, 48)); // NOI18N
-        Velocimetro.setForeground(new java.awt.Color(0, 0, 0));
-        Velocimetro.setText("200km/h");
-        panelVelocimetro.add(Velocimetro, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
+        lblVelocidad.setFont(new java.awt.Font("OCR A Extended", 0, 48)); // NOI18N
+        lblVelocidad.setForeground(new java.awt.Color(0, 0, 0));
+        lblVelocidad.setText("200km/h");
+        panelVelocimetro.add(lblVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
 
         getContentPane().add(panelVelocimetro, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 290, 60));
 
-        izquierdaOn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        izquierdaOn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/yellow-left-arrow.png"))); // NOI18N
-        izquierdaOn.setEnabled(false);
-        getContentPane().add(izquierdaOn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 92, 40, 40));
+        lblIzquierdaOn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblIzquierdaOn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/yellow-left-arrow.png"))); // NOI18N
+        lblIzquierdaOn.setEnabled(false);
+        getContentPane().add(lblIzquierdaOn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 92, 40, 40));
 
-        derechaOn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        derechaOn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/yellow-right-arrow.png"))); // NOI18N
-        derechaOn.setEnabled(false);
-        derechaOn.setOpaque(true);
-        getContentPane().add(derechaOn, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 92, 40, 40));
+        lblDerechaOn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblDerechaOn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/yellow-right-arrow.png"))); // NOI18N
+        lblDerechaOn.setEnabled(false);
+        lblDerechaOn.setOpaque(true);
+        getContentPane().add(lblDerechaOn, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 92, 40, 40));
 
-        luzBaja.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        luzBaja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/low-beam.png"))); // NOI18N
-        luzBaja.setEnabled(false);
-        getContentPane().add(luzBaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 92, 40, 40));
+        lblLuzBaja.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblLuzBaja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/low-beam.png"))); // NOI18N
+        lblLuzBaja.setEnabled(false);
+        getContentPane().add(lblLuzBaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 92, 40, 40));
 
-        luzAlta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        luzAlta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/high-beam.png"))); // NOI18N
-        luzAlta.setEnabled(false);
-        getContentPane().add(luzAlta, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 92, 40, 40));
+        lblLuzAlta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblLuzAlta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/high-beam.png"))); // NOI18N
+        lblLuzAlta.setEnabled(false);
+        getContentPane().add(lblLuzAlta, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 92, 40, 40));
 
-        parking.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        parking.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/parking brake.png"))); // NOI18N
-        parking.setEnabled(false);
-        getContentPane().add(parking, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 92, 40, 40));
+        lblParking.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblParking.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/parking brake.png"))); // NOI18N
+        lblParking.setEnabled(false);
+        getContentPane().add(lblParking, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 92, 40, 40));
 
-        seatbeltD.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        seatbeltD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/seatbelt.png"))); // NOI18N
-        seatbeltD.setEnabled(false);
-        getContentPane().add(seatbeltD, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, -1, -1));
+        lblSeatbeltD.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSeatbeltD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/seatbelt.png"))); // NOI18N
+        lblSeatbeltD.setEnabled(false);
+        getContentPane().add(lblSeatbeltD, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, -1, -1));
 
-        seatbeltP.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        seatbeltP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/seatbelt.png"))); // NOI18N
-        seatbeltP.setEnabled(false);
-        getContentPane().add(seatbeltP, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, -1, -1));
+        lblSeatbeltP.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSeatbeltP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/seatbelt.png"))); // NOI18N
+        lblSeatbeltP.setEnabled(false);
+        getContentPane().add(lblSeatbeltP, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, -1, -1));
 
-        wsWiperSelector.setMajorTickSpacing(1);
-        wsWiperSelector.setMaximum(5);
-        wsWiperSelector.setMinorTickSpacing(1);
-        wsWiperSelector.setPaintLabels(true);
-        wsWiperSelector.setPaintTicks(true);
-        wsWiperSelector.setSnapToTicks(true);
-        wsWiperSelector.setValue(0);
-        getContentPane().add(wsWiperSelector, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 40, -1, -1));
+        sliderWiperSelector.setMajorTickSpacing(1);
+        sliderWiperSelector.setMaximum(3);
+        sliderWiperSelector.setMinorTickSpacing(1);
+        sliderWiperSelector.setPaintLabels(true);
+        sliderWiperSelector.setPaintTicks(true);
+        sliderWiperSelector.setSnapToTicks(true);
+        sliderWiperSelector.setValue(0);
+        getContentPane().add(sliderWiperSelector, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 40, -1, -1));
 
-        wWIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        wWIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/windshieldWiper.png"))); // NOI18N
-        wWIcon.setEnabled(false);
-        getContentPane().add(wWIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 40, 40, 40));
+        lblWindshieldIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblWindshieldIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/windshieldWiper.png"))); // NOI18N
+        lblWindshieldIcon.setEnabled(false);
+        getContentPane().add(lblWindshieldIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 40, 40, 40));
 
-        rpmNeedle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        rpmNeedle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/rpmNeedle.png"))); // NOI18N
-        getContentPane().add(rpmNeedle, new org.netbeans.lib.awtextra.AbsoluteConstraints(435, 115, -1, -1));
+        lblRpmNeedle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblRpmNeedle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/rpmNeedle.png"))); // NOI18N
+        getContentPane().add(lblRpmNeedle, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, 250, 250));
 
-        rpmGauge.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        rpmGauge.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/rpmGauge.png"))); // NOI18N
-        getContentPane().add(rpmGauge, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, 250, 250));
+        lblRpmGauge.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblRpmGauge.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/rpmGauge.png"))); // NOI18N
+        getContentPane().add(lblRpmGauge, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, 250, 250));
+
+        btnAcelerador.setText("Acelerar");
+        btnAcelerador.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnAceleradorMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btnAceleradorMouseReleased(evt);
+            }
+        });
+        getContentPane().add(btnAcelerador, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAceleradorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceleradorMousePressed
+        motor.setAcelerando(true);
+    }//GEN-LAST:event_btnAceleradorMousePressed
+
+    private void btnAceleradorMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceleradorMouseReleased
+        motor.setAcelerando(false);
+    }//GEN-LAST:event_btnAceleradorMouseReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Velocimetro;
-    private javax.swing.JLabel derechaOn;
-    private javax.swing.JLabel izquierdaOn;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel kilometraje;
-    private javax.swing.JPanel kmBackground;
-    private javax.swing.JLabel luzAlta;
-    private javax.swing.JLabel luzBaja;
-    private javax.swing.JPanel mBackground;
-    private javax.swing.JProgressBar nvlCombustible;
+    private javax.swing.JButton btnAcelerador;
+    private javax.swing.JLabel lblCombustible;
+    private javax.swing.JLabel lblDerechaOn;
+    private javax.swing.JLabel lblIzquierdaOn;
+    private javax.swing.JLabel lblKm;
+    private javax.swing.JLabel lblLuzAlta;
+    private javax.swing.JLabel lblLuzBaja;
+    private javax.swing.JLabel lblMetros;
+    private javax.swing.JLabel lblParking;
+    private javax.swing.JLabel lblRpmGauge;
+    private javax.swing.JLabel lblRpmNeedle;
+    private javax.swing.JLabel lblSeatbeltD;
+    private javax.swing.JLabel lblSeatbeltP;
+    private javax.swing.JLabel lblTextKm;
+    private javax.swing.JLabel lblVelocidad;
+    private javax.swing.JLabel lblWindshieldIcon;
+    private javax.swing.JPanel panelKm;
+    private javax.swing.JPanel panelMetros;
     private javax.swing.JPanel panelOdometro;
     private javax.swing.JPanel panelVelocimetro;
-    private javax.swing.JLabel parking;
-    private javax.swing.JLabel rpmGauge;
-    private javax.swing.JLabel rpmNeedle;
-    private javax.swing.JLabel seatbeltD;
-    private javax.swing.JLabel seatbeltP;
-    private javax.swing.JLabel textCombustible;
-    private javax.swing.JLabel textKm;
-    private javax.swing.JLabel wWIcon;
-    private javax.swing.JSlider wsWiperSelector;
+    private javax.swing.JProgressBar prgBarNvlCombustible;
+    private javax.swing.JSlider sliderWiperSelector;
     // End of variables declaration//GEN-END:variables
 }
