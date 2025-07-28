@@ -2,9 +2,19 @@
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
   <Properties>
+    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+      <Color blue="33" green="33" red="33" type="rgb"/>
+    </Property>
+    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+      <Border info="null"/>
+    </Property>
+    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+      <Color blue="40" green="40" id="darkGray" palette="1" red="40" type="palette"/>
+    </Property>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[624, 360]"/>
     </Property>
+    <Property name="opaque" type="boolean" value="true"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -42,14 +52,14 @@
         <Property name="useNullLayout" type="boolean" value="false"/>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JProgressBar" name="nvlCombustible">
+        <Component class="javax.swing.JProgressBar" name="prgBarNvlCombustible">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="6" y="6" width="298" height="29"/>
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JLabel" name="textCombustible">
+        <Component class="javax.swing.JLabel" name="lblCombustible">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="OCR A Extended" size="24" style="0"/>
@@ -65,7 +75,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JLabel" name="textKm">
+        <Component class="javax.swing.JLabel" name="lblTextKm">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="OCR A Extended" size="18" style="0"/>
@@ -81,7 +91,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Container class="javax.swing.JPanel" name="kmBackground">
+        <Container class="javax.swing.JPanel" name="panelKm">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="10" y="80" width="250" height="50"/>
@@ -92,7 +102,7 @@
             <Property name="useNullLayout" type="boolean" value="false"/>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="kilometraje">
+            <Component class="javax.swing.JLabel" name="lblKm">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="OCR A Extended" size="48" style="0"/>
@@ -108,7 +118,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="mBackground">
+        <Container class="javax.swing.JPanel" name="panelMetros">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="99" green="99" red="99" type="rgb"/>
@@ -125,7 +135,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel1" pref="28" max="32767" attributes="0"/>
+                      <Component id="lblMetros" pref="28" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -134,14 +144,14 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblMetros" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="8" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabel1">
+            <Component class="javax.swing.JLabel" name="lblMetros">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="OCR A Extended" size="24" style="0"/>
@@ -173,7 +183,7 @@
         <Property name="useNullLayout" type="boolean" value="false"/>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="Velocimetro">
+        <Component class="javax.swing.JLabel" name="lblVelocidad">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="OCR A Extended" size="48" style="0"/>
@@ -191,7 +201,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="izquierdaOn">
+    <Component class="javax.swing.JLabel" name="lblIzquierdaOn">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -205,7 +215,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="derechaOn">
+    <Component class="javax.swing.JLabel" name="lblDerechaOn">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -220,7 +230,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="luzBaja">
+    <Component class="javax.swing.JLabel" name="lblLuzBaja">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -234,7 +244,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="luzAlta">
+    <Component class="javax.swing.JLabel" name="lblLuzAlta">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -248,7 +258,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="parking">
+    <Component class="javax.swing.JLabel" name="lblParking">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -262,7 +272,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="seatbeltD">
+    <Component class="javax.swing.JLabel" name="lblSeatbeltD">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -276,7 +286,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="seatbeltP">
+    <Component class="javax.swing.JLabel" name="lblSeatbeltP">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -290,10 +300,10 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JSlider" name="wsWiperSelector">
+    <Component class="javax.swing.JSlider" name="sliderWiperSelector">
       <Properties>
         <Property name="majorTickSpacing" type="int" value="1"/>
-        <Property name="maximum" type="int" value="5"/>
+        <Property name="maximum" type="int" value="3"/>
         <Property name="minorTickSpacing" type="int" value="1"/>
         <Property name="paintLabels" type="boolean" value="true"/>
         <Property name="paintTicks" type="boolean" value="true"/>
@@ -306,7 +316,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="wWIcon">
+    <Component class="javax.swing.JLabel" name="lblWindshieldIcon">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -320,7 +330,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="rpmNeedle">
+    <Component class="javax.swing.JLabel" name="lblRpmNeedle">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -329,11 +339,11 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="435" y="115" width="-1" height="-1"/>
+          <AbsoluteConstraints x="350" y="80" width="250" height="250"/>
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="rpmGauge">
+    <Component class="javax.swing.JLabel" name="lblRpmGauge">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -343,6 +353,20 @@
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="350" y="80" width="250" height="250"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnAcelerador">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Acelerar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnAceleradorMousePressed"/>
+        <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnAceleradorMouseReleased"/>
+      </Events>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="440" y="0" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
