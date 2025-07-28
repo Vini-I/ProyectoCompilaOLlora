@@ -18,7 +18,13 @@ public class Combustible {
     }
     
     public void consumir(double rpm, double cc, double tiempoSegundos) {
-        double consumoActual = (rpm*cc) / 15 * (tiempoSegundos / 60.0);
+        double consumoBase = 0.008;
+        
+        double factorRPM = rpm / 3000.0;
+        
+        double consumoHora = consumoBase * factorRPM;
+        
+        double consumoActual = consumoHora * (tiempoSegundos / 3600);
         this.litrosActuales -= consumoActual;
         calcularPorcentaje();
     }
