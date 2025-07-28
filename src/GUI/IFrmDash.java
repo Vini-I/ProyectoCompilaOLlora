@@ -122,6 +122,7 @@ public class IFrmDash extends javax.swing.JInternalFrame {
         setForeground(java.awt.Color.darkGray);
         setMinimumSize(new java.awt.Dimension(624, 360));
         setOpaque(true);
+        setPreferredSize(new java.awt.Dimension(624, 360));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelOdometro.setBackground(new java.awt.Color(204, 204, 204));
