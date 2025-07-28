@@ -4,6 +4,7 @@
  */
 package GUI;
 
+import Piezas.Motor.CajaCambios;
 import Piezas.Motor.Kilometraje;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -24,6 +25,7 @@ public class IFrmDash extends javax.swing.JInternalFrame {
     private final Motor motor;
     private Timer temporizador;
     private Kilometraje kilometraje;
+    private CajaCambios caja;
     /**
      * Creates new form IFrmDash
      */
@@ -31,7 +33,8 @@ public class IFrmDash extends javax.swing.JInternalFrame {
         initComponents();
         agujaOriginal = new ImageIcon(getClass().getResource("/Iconos/rpmNeedle.png")).getImage();
         motor = new Motor(2000);
-        kilometraje = new Kilometraje();
+        caja = new CajaCambios();
+        kilometraje = new Kilometraje(caja);
         this.temporizador = new Timer(10, e -> {
             motor.actualizarRPM();
             if (motor.isEncendido()) {
@@ -47,7 +50,7 @@ public class IFrmDash extends javax.swing.JInternalFrame {
             kilometraje.actualizarInfo(rpm, 0.01);
             
             int velocidad = kilometraje.getVelocidad();
-            lblVelocidad.setText(velocidad + " km/h");
+            lblVelocidad.setText(velocidad + "km/h");
             
             int metros = (int) (kilometraje.getDistanciaMetros() / 100);
             lblMetros.setText(Integer.toString(metros));
@@ -104,6 +107,7 @@ public class IFrmDash extends javax.swing.JInternalFrame {
         lblMetros = new javax.swing.JLabel();
         panelVelocimetro = new javax.swing.JPanel();
         lblVelocidad = new javax.swing.JLabel();
+        lblMarcha = new javax.swing.JLabel();
         lblIzquierdaOn = new javax.swing.JLabel();
         lblDerechaOn = new javax.swing.JLabel();
         lblLuzBaja = new javax.swing.JLabel();
@@ -116,6 +120,8 @@ public class IFrmDash extends javax.swing.JInternalFrame {
         lblRpmNeedle = new javax.swing.JLabel();
         lblRpmGauge = new javax.swing.JLabel();
         btnAcelerador = new javax.swing.JButton();
+        btnBajarMarcha = new javax.swing.JButton();
+        btnSubirMarcha = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(51, 51, 51));
         setBorder(null);
@@ -182,7 +188,12 @@ public class IFrmDash extends javax.swing.JInternalFrame {
         lblVelocidad.setFont(new java.awt.Font("OCR A Extended", 0, 48)); // NOI18N
         lblVelocidad.setForeground(new java.awt.Color(0, 0, 0));
         lblVelocidad.setText("200km/h");
-        panelVelocimetro.add(lblVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
+        panelVelocimetro.add(lblVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, -1, -1));
+
+        lblMarcha.setFont(new java.awt.Font("OCR A Extended", 0, 48)); // NOI18N
+        lblMarcha.setForeground(new java.awt.Color(0, 0, 0));
+        lblMarcha.setText("N");
+        panelVelocimetro.add(lblMarcha, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         getContentPane().add(panelVelocimetro, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 290, 60));
 
@@ -253,7 +264,23 @@ public class IFrmDash extends javax.swing.JInternalFrame {
                 btnAceleradorMouseReleased(evt);
             }
         });
-        getContentPane().add(btnAcelerador, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 0, -1, -1));
+        getContentPane().add(btnAcelerador, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 0, -1, -1));
+
+        btnBajarMarcha.setText("Marcha v");
+        btnBajarMarcha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBajarMarchaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBajarMarcha, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 0, -1, -1));
+
+        btnSubirMarcha.setText("Marcha ^");
+        btnSubirMarcha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubirMarchaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSubirMarcha, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -266,15 +293,28 @@ public class IFrmDash extends javax.swing.JInternalFrame {
         motor.setAcelerando(false);
     }//GEN-LAST:event_btnAceleradorMouseReleased
 
+    private void btnBajarMarchaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajarMarchaActionPerformed
+        caja.bajarMarcha();
+        lblMarcha.setText(caja.getMarchaTexto());
+    }//GEN-LAST:event_btnBajarMarchaActionPerformed
+
+    private void btnSubirMarchaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubirMarchaActionPerformed
+        caja.subirMarcha();
+        lblMarcha.setText(caja.getMarchaTexto());
+    }//GEN-LAST:event_btnSubirMarchaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAcelerador;
+    private javax.swing.JButton btnBajarMarcha;
+    private javax.swing.JButton btnSubirMarcha;
     private javax.swing.JLabel lblCombustible;
     private javax.swing.JLabel lblDerechaOn;
     private javax.swing.JLabel lblIzquierdaOn;
     private javax.swing.JLabel lblKm;
     private javax.swing.JLabel lblLuzAlta;
     private javax.swing.JLabel lblLuzBaja;
+    private javax.swing.JLabel lblMarcha;
     private javax.swing.JLabel lblMetros;
     private javax.swing.JLabel lblParking;
     private javax.swing.JLabel lblRpmGauge;
