@@ -3,20 +3,32 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package GUI;
-
+import Piezas.Puertas.Puerta;
+import javax.swing.ImageIcon;
+import Piezas.Luces.Luz;
+import Piezas.Seguridad.Alarma;
+import java.awt.Color;
 /**
  *
  * @author llean
  */
 public class IFrmPuertas extends javax.swing.JInternalFrame {
-
+Puerta puertaD;
+Puerta puertaI;
+Luz luz;
+Alarma alarma;
     /**
      * Creates new form IFrmPuertas
      */
     public IFrmPuertas() {
         initComponents();
-    }
+        puertaD = new Puerta();
+        puertaI = new Puerta();
+        luz = new Luz();
+        alarma = new Alarma();
 
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,48 +38,65 @@ public class IFrmPuertas extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblAlarmaOn = new javax.swing.JLabel();
-        lblAlarmaOff = new javax.swing.JLabel();
-        lblLuzOn = new javax.swing.JLabel();
-        lblLuzOff = new javax.swing.JLabel();
+        pnlSonandoOn = new javax.swing.JPanel();
+        lblSonando = new javax.swing.JLabel();
+        lblAlarma = new javax.swing.JLabel();
+        lblLuz = new javax.swing.JLabel();
         lblPuertas = new javax.swing.JLabel();
-        btnLuzToggle = new javax.swing.JButton();
+        btnLuz = new javax.swing.JButton();
         btnBloquear = new javax.swing.JToggleButton();
         btnAlarma = new javax.swing.JButton();
         btnCarroOn = new javax.swing.JButton();
+        btnLeftDoor = new javax.swing.JButton();
+        btnRightDoor = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(384, 360));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblAlarmaOn.setBackground(new java.awt.Color(255, 0, 0));
-        lblAlarmaOn.setOpaque(true);
-        getContentPane().add(lblAlarmaOn, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 170, 50));
+        pnlSonandoOn.setBackground(new java.awt.Color(0, 0, 0));
 
-        lblAlarmaOff.setBackground(new java.awt.Color(153, 0, 0));
-        lblAlarmaOff.setOpaque(true);
-        getContentPane().add(lblAlarmaOff, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 170, 50));
+        lblSonando.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSonando.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/warning.png"))); // NOI18N
+        pnlSonandoOn.add(lblSonando);
 
-        lblLuzOn.setBackground(new java.awt.Color(255, 255, 255));
-        lblLuzOn.setOpaque(true);
-        getContentPane().add(lblLuzOn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 170, 50));
+        getContentPane().add(pnlSonandoOn, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 50, 40));
 
-        lblLuzOff.setBackground(new java.awt.Color(204, 204, 204));
-        lblLuzOff.setOpaque(true);
-        getContentPane().add(lblLuzOff, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 170, 50));
+        lblAlarma.setBackground(new java.awt.Color(154, 0, 0));
+        lblAlarma.setOpaque(true);
+        getContentPane().add(lblAlarma, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 170, 50));
+
+        lblLuz.setBackground(new java.awt.Color(204, 204, 204));
+        lblLuz.setOpaque(true);
+        getContentPane().add(lblLuz, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 170, 50));
 
         lblPuertas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/carClosedDoors.png"))); // NOI18N
         getContentPane().add(lblPuertas, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, -1, 200));
 
-        btnLuzToggle.setBackground(new java.awt.Color(153, 153, 153));
-        btnLuzToggle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/luzTecho.png"))); // NOI18N
-        getContentPane().add(btnLuzToggle, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 90, 50));
+        btnLuz.setBackground(new java.awt.Color(153, 153, 153));
+        btnLuz.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/luzTecho.png"))); // NOI18N
+        btnLuz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLuzActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnLuz, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 90, 50));
 
         btnBloquear.setBackground(new java.awt.Color(153, 153, 153));
         btnBloquear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/candadoCerrado.png"))); // NOI18N
+        btnBloquear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBloquearActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnBloquear, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 260, 80, 50));
 
         btnAlarma.setBackground(new java.awt.Color(153, 153, 153));
         btnAlarma.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/alarma.png"))); // NOI18N
+        btnAlarma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlarmaActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnAlarma, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, 80, 50));
 
         btnCarroOn.setBackground(new java.awt.Color(153, 153, 153));
@@ -79,23 +108,156 @@ public class IFrmPuertas extends javax.swing.JInternalFrame {
         });
         getContentPane().add(btnCarroOn, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 260, 90, 50));
 
+        btnLeftDoor.setBackground(new java.awt.Color(153, 153, 153));
+        btnLeftDoor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/carDoorLeft.png"))); // NOI18N
+        btnLeftDoor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLeftDoorActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnLeftDoor, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 50, 50));
+
+        btnRightDoor.setBackground(new java.awt.Color(153, 153, 153));
+        btnRightDoor.setForeground(new java.awt.Color(153, 153, 153));
+        btnRightDoor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/carDoorRight.png"))); // NOI18N
+        btnRightDoor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRightDoorActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnRightDoor, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 130, 50, 50));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCarroOnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarroOnActionPerformed
+
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCarroOnActionPerformed
 
+    private void btnRightDoorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRightDoorActionPerformed
+        if(!puertaD.isAbierta() && !puertaI.isAbierta() && puertaD.isBloqueada() && alarma.isArmada()){
+            pnlSonandoOn.setBackground(Color.yellow);
+            alarma.sonar();
+            
+         } else if(!puertaD.isAbierta() && !puertaI.isAbierta() && !puertaD.isBloqueada()){
+            ImageIcon icono = new ImageIcon(getClass().getResource("/Iconos/carRightOpen.png"));
+            lblPuertas.setIcon(icono);
+            puertaD.abrir();
+            
+            luz.encender();
+            lblLuz.setBackground(Color.white);
+            
+        } else if(!puertaD.isAbierta() && puertaI.isAbierta() && !puertaD.isBloqueada()) {
+            ImageIcon icono = new ImageIcon(getClass().getResource("/Iconos/carOpenDoors.png"));
+            lblPuertas.setIcon(icono);
+            puertaD.abrir();
+            
+             }else if(puertaI.isAbierta() && puertaD.isAbierta()) {
+            ImageIcon icono = new ImageIcon(getClass().getResource("/Iconos/carLeftOpen.png"));
+            lblPuertas.setIcon(icono);
+            puertaD.cerrar();
+
+        } else if(puertaD.isAbierta() && !puertaI.isAbierta()){
+            ImageIcon icono = new ImageIcon(getClass().getResource("/Iconos/carClosedDoors.png"));
+            lblPuertas.setIcon(icono);
+            puertaD.cerrar();
+            
+            luz.apagar();
+            lblLuz.setBackground(Color.gray);
+        }
+       
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRightDoorActionPerformed
+
+    private void btnLeftDoorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeftDoorActionPerformed
+         if(!puertaI.isAbierta() && !puertaD.isAbierta() && puertaI.isBloqueada() && alarma.isArmada() ){
+            pnlSonandoOn.setBackground(Color.yellow);
+            alarma.sonar();
+            
+            
+            } else if(!puertaI.isAbierta() && !puertaD.isAbierta() && !puertaI.isBloqueada()){
+            ImageIcon icono = new ImageIcon(getClass().getResource("/Iconos/carLeftOpen.png"));
+            lblPuertas.setIcon(icono);
+            puertaI.abrir();
+            
+            luz.encender();
+            lblLuz.setBackground(Color.white);
+        } else if(!puertaI.isAbierta() && puertaD.isAbierta() && !puertaI.isBloqueada()) {
+            ImageIcon icono = new ImageIcon(getClass().getResource("/Iconos/carOpenDoors.png"));
+            lblPuertas.setIcon(icono);
+            puertaI.abrir();
+            
+        }else if(puertaI.isAbierta() && puertaD.isAbierta()) {
+            ImageIcon icono = new ImageIcon(getClass().getResource("/Iconos/carRightOpen.png"));
+            lblPuertas.setIcon(icono);
+            puertaI.cerrar();
+        
+            
+        } else if(!puertaD.isAbierta() && puertaI.isAbierta()) {
+            ImageIcon icono = new ImageIcon(getClass().getResource("/Iconos/carClosedDoors.png"));
+            lblPuertas.setIcon(icono);
+            puertaI.cerrar();
+            
+            luz.apagar();
+            lblLuz.setBackground(Color.gray);
+        }
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLeftDoorActionPerformed
+
+    private void btnBloquearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBloquearActionPerformed
+        if(puertaD.isBloqueada() == false && puertaI.isBloqueada() == false) {
+            puertaD.bloquear();
+            puertaI.bloquear();
+             ImageIcon icono = new ImageIcon(getClass().getResource("/Iconos/candadoAbierto.png"));
+            btnBloquear.setIcon(icono);
+        } else {
+            puertaD.desbloquear();
+            puertaI.desbloquear();
+            ImageIcon icono = new ImageIcon(getClass().getResource("/Iconos/candadoCerrado.png"));
+            btnBloquear.setIcon(icono);
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBloquearActionPerformed
+
+    private void btnLuzActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuzActionPerformed
+        if(!luz.isEncendido()) {
+        luz.encender();
+        lblLuz.setBackground(Color.white);
+        } else if(!puertaD.isAbierta() && !puertaI.isAbierta()) {
+            luz.apagar();
+            lblLuz.setBackground(Color.gray);
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLuzActionPerformed
+
+    private void btnAlarmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlarmaActionPerformed
+    if(!alarma.isArmada()) {
+        alarma.armar();
+        lblAlarma.setBackground(Color.red);
+    } else {
+        alarma.desarmar();
+        Color color = new Color(76, 0, 0);
+        lblAlarma.setBackground(color);
+        alarma.apagarAlarma();
+        pnlSonandoOn.setBackground(Color.BLACK);
+    }
+    // TODO add your handling code here:
+    }//GEN-LAST:event_btnAlarmaActionPerformed
+  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlarma;
     private javax.swing.JToggleButton btnBloquear;
     private javax.swing.JButton btnCarroOn;
-    private javax.swing.JButton btnLuzToggle;
-    private javax.swing.JLabel lblAlarmaOff;
-    private javax.swing.JLabel lblAlarmaOn;
-    private javax.swing.JLabel lblLuzOff;
-    private javax.swing.JLabel lblLuzOn;
+    private javax.swing.JButton btnLeftDoor;
+    private javax.swing.JButton btnLuz;
+    private javax.swing.JButton btnRightDoor;
+    private javax.swing.JLabel lblAlarma;
+    private javax.swing.JLabel lblLuz;
     private javax.swing.JLabel lblPuertas;
+    private javax.swing.JLabel lblSonando;
+    private javax.swing.JPanel pnlSonandoOn;
     // End of variables declaration//GEN-END:variables
 }
