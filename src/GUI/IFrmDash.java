@@ -4,8 +4,7 @@
  */
 package GUI;
 
-import Piezas.Motor.CajaCambios;
-import Piezas.Motor.Kilometraje;
+import Piezas.Motor.*;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
@@ -13,7 +12,6 @@ import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.Timer;
-import Piezas.Motor.Motor;
 
 /**
  *
@@ -26,6 +24,7 @@ public class IFrmDash extends javax.swing.JInternalFrame {
     private Timer temporizador;
     private Kilometraje kilometraje;
     private CajaCambios caja;
+    private Combustible combustible;
     /**
      * Creates new form IFrmDash
      */
@@ -34,6 +33,7 @@ public class IFrmDash extends javax.swing.JInternalFrame {
         agujaOriginal = new ImageIcon(getClass().getResource("/Iconos/rpmNeedle.png")).getImage();
         motor = new Motor(2000);
         caja = new CajaCambios();
+        combustible = new Combustible();
         kilometraje = new Kilometraje(caja);
         this.temporizador = new Timer(10, e -> {
             motor.actualizarRPM();
@@ -42,6 +42,9 @@ public class IFrmDash extends javax.swing.JInternalFrame {
             }
             
             int rpm = motor.getRpm();
+            
+            combustible.consumir(rpm, motor.getCc(), 0.01);
+            prgBarNvlCombustible.setValue(combustible.getPorcentajeActual());
             
             double angulo = mapearRPMaAngulo(rpm, 0, 8000);
             
