@@ -16,12 +16,14 @@ import javax.swing.Timer;
 public class IFrmCamaraReversa extends javax.swing.JInternalFrame {
 SensorReversa reversa;
 private int segundo = 3;
+private IFrmDash dash;
     /**
      * Creates new form IFrmCamaraReversa
      */
-    public IFrmCamaraReversa() {
-        initComponents();
+    public IFrmCamaraReversa(IFrmDash dash) {
         reversa = new SensorReversa();
+        this.dash = dash;
+        initComponents();
     }
 
     /**
@@ -92,6 +94,8 @@ private int segundo = 3;
     
     private void btnReversaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReversaActionPerformed
         if(!reversa.isActivo()){
+            dash.getCaja().bajarMarcha();
+            dash.getLblMarcha().setText(dash.getCaja().getMarchaTexto());
             ImageIcon icono = new ImageIcon(getClass().getResource("/Iconos/camaraReversaLibre.png"));
             lblCamara.setIcon(icono);
             reversa.iniciarSensor();
@@ -101,6 +105,8 @@ private int segundo = 3;
        
             
         } else {
+            dash.getCaja().subirMarcha();
+            dash.getLblMarcha().setText(dash.getCaja().getMarchaTexto());
              ImageIcon icono = new ImageIcon(getClass().getResource("/Iconos/yotota.png"));
             lblCamara.setIcon(icono);
             reversa.detenerSensor();

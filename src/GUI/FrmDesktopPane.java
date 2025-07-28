@@ -53,7 +53,7 @@ public class FrmDesktopPane extends javax.swing.JFrame {
     dash.setVisible(true);
     dash.setLocation(puerta.getX() + puerta.getWidth(), Base.getHeight() - dash.getHeight());
     
-    reversa = new IFrmCamaraReversa();
+    reversa = new IFrmCamaraReversa(dash);
     Base.add(reversa);
     reversa.setVisible(true);
     reversa.setLocation(dash.getX() + dash.getWidth(), Base.getHeight() - reversa.getHeight());

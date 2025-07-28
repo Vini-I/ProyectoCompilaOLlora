@@ -11,6 +11,7 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JSlider;
 import javax.swing.Timer;
 
 /**
@@ -300,8 +301,10 @@ public class IFrmDash extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnAceleradorMouseReleased
 
     private void btnBajarMarchaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajarMarchaActionPerformed
-        caja.bajarMarcha();
-        lblMarcha.setText(caja.getMarchaTexto());
+        if (caja.getMarchaActual() > 1) {
+            caja.bajarMarcha();
+            lblMarcha.setText(caja.getMarchaTexto());
+        }
     }//GEN-LAST:event_btnBajarMarchaActionPerformed
 
     private void btnSubirMarchaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubirMarchaActionPerformed
@@ -309,6 +312,47 @@ public class IFrmDash extends javax.swing.JInternalFrame {
         lblMarcha.setText(caja.getMarchaTexto());
     }//GEN-LAST:event_btnSubirMarchaActionPerformed
 
+    public CajaCambios getCaja() {
+        return caja;
+    }
+
+    public JLabel getLblDerechaOn() {
+        return lblDerechaOn;
+    }
+
+    public JLabel getLblIzquierdaOn() {
+        return lblIzquierdaOn;
+    }
+
+    public JLabel getLblLuzAlta() {
+        return lblLuzAlta;
+    }
+
+    public JLabel getLblLuzBaja() {
+        return lblLuzBaja;
+    }
+
+    public JLabel getLblMarcha() {
+        return lblMarcha;
+    }
+
+    public JLabel getLblParking() {
+        return lblParking;
+    }
+
+    public JLabel getLblSeatbeltD() {
+        return lblSeatbeltD;
+    }
+
+    public JLabel getLblSeatbeltP() {
+        return lblSeatbeltP;
+    }
+
+    public JSlider getSliderWiperSelector() {
+        return sliderWiperSelector;
+    }
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAcelerador;

@@ -9,7 +9,7 @@ package Piezas.Motor;
  * @author Brwni
  */
 public class CajaCambios {
-    private final double[] relaciones = {3.91, 0, 3.2, 2.1, 1.5, 1.0, 0.8};
+    private final double[] relaciones = {4.3, 0, 3.2, 2.1, 1.5, 1.0, 0.8};
     private final double relacionFinal = 3.9;
     private final double circunferenciaRueda = 1.6;
     
@@ -22,13 +22,9 @@ public class CajaCambios {
     }
 
     public void bajarMarcha() {
-        if (marchaActual > 1) {
+        if (marchaActual >= 1) {
             marchaActual--;
         }
-    }
-
-    public void ponerNeutro() {
-        marchaActual = 0;
     }
 
     public int getMarchaActual() {
@@ -44,7 +40,7 @@ public class CajaCambios {
     }
 
     public double calcularVelocidad(int rpm) {
-        if (marchaActual == 0 || relaciones[marchaActual] == 0) return 0.0;
+        if (marchaActual == 1 || relaciones[marchaActual] == 1) return 0.0;
 
         double relacionTotal = relaciones[marchaActual] * relacionFinal;
 
