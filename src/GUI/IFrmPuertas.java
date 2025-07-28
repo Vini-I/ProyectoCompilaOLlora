@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import Piezas.Luces.Luz;
 import Piezas.Seguridad.Alarma;
 import java.awt.Color;
+import Piezas.Motor.Encendido;
 /**
  *
  * @author llean
@@ -17,16 +18,19 @@ Puerta puertaD;
 Puerta puertaI;
 Luz luz;
 Alarma alarma;
+    private IFrmDash dash;
+    private Encendido encendido;
     /**
      * Creates new form IFrmPuertas
      */
-    public IFrmPuertas() {
+    public IFrmPuertas(IFrmDash dash) {
         initComponents();
         puertaD = new Puerta();
         puertaI = new Puerta();
         luz = new Luz();
         alarma = new Alarma();
-
+        encendido = new Encendido();
+        this.dash = dash;
     }
     
     /**
@@ -131,8 +135,16 @@ Alarma alarma;
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCarroOnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarroOnActionPerformed
-
-        // TODO add your handling code here:
+        if (!encendido.isMotorEncendido()) {
+            encendido.encenderMotor();
+            dash.getMotor().encender();
+            dash.getTemporizador().start();
+        } else {
+            encendido.apagarMotor();
+            dash.getMotor().apagar();
+            dash.getTemporizador().stop();
+            dash.rotarAguja(dash.getLblRpmNeedle(), -157);
+        }
     }//GEN-LAST:event_btnCarroOnActionPerformed
 
     private void btnRightDoorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRightDoorActionPerformed

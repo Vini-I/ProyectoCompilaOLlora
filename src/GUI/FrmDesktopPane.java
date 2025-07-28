@@ -43,26 +43,27 @@ public class FrmDesktopPane extends javax.swing.JFrame {
     }
     
     private void agregarInternalFrames() {
-    puerta = new IFrmPuertas();
-    Base.add(puerta);
-    puerta.setVisible(true);
-    puerta.setLocation(0, Base.getHeight() - puerta.getHeight());
+        dash = new IFrmDash();
+        radio = new IFrmRadioClimatizacion();
+        reversa = new IFrmCamaraReversa(dash);
+        puerta = new IFrmPuertas(dash);
+        
+        Base.add(puerta);
+        puerta.setVisible(true);
+        puerta.setLocation(0, Base.getHeight() - puerta.getHeight());
 
-    dash = new IFrmDash();
-    Base.add(dash);
-    dash.setVisible(true);
-    dash.setLocation(puerta.getX() + puerta.getWidth(), Base.getHeight() - dash.getHeight());
-    
-    reversa = new IFrmCamaraReversa(dash);
-    Base.add(reversa);
-    reversa.setVisible(true);
-    reversa.setLocation(dash.getX() + dash.getWidth(), Base.getHeight() - reversa.getHeight());
-
-    radio = new IFrmRadioClimatizacion();
-    Base.add(radio);
-    radio.setVisible(true);
-    radio.setLocation(reversa.getX() + reversa.getWidth(), Base.getHeight() - radio.getHeight());
-}
+        Base.add(dash);
+        dash.setVisible(true);
+        dash.setLocation(puerta.getX() + puerta.getWidth(), Base.getHeight() - dash.getHeight());
+        
+        Base.add(reversa);
+        reversa.setVisible(true);
+        reversa.setLocation(dash.getX() + dash.getWidth(), Base.getHeight() - reversa.getHeight());
+        
+        Base.add(radio);
+        radio.setVisible(true);
+        radio.setLocation(reversa.getX() + reversa.getWidth(), Base.getHeight() - radio.getHeight());
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

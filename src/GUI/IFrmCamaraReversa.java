@@ -115,6 +115,8 @@ private IFrmDash dash;
              Color color = new Color(76, 0, 0);
              lblStop.setBackground(color);
              segundo = 3;
+             
+             timer.stop();
         }
         
            

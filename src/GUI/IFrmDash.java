@@ -8,6 +8,7 @@ import Piezas.Motor.*;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -22,9 +23,9 @@ public class IFrmDash extends javax.swing.JInternalFrame {
     
     private final Image agujaOriginal;
     private final Motor motor;
-    private Timer temporizador;
+    private final Timer temporizador;
     private Kilometraje kilometraje;
-    private CajaCambios caja;
+    private final CajaCambios caja;
     private Combustible combustible;
     /**
      * Creates new form IFrmDash
@@ -32,15 +33,17 @@ public class IFrmDash extends javax.swing.JInternalFrame {
     public IFrmDash() {
         initComponents();
         agujaOriginal = new ImageIcon(getClass().getResource("/Iconos/rpmNeedle.png")).getImage();
+        rotarAguja(lblRpmNeedle, -157);
         motor = new Motor(2000);
         caja = new CajaCambios();
         combustible = new Combustible();
         kilometraje = new Kilometraje(caja);
-        this.temporizador = new Timer(10, e -> {
+        motor.apagar();
+        this.temporizador = new Timer(10, (ActionEvent e) -> {
+            System.out.println("Temporizador activo, RPM: " + motor.getRpm());
+            if (!motor.isEncendido()) return;
+            
             motor.actualizarRPM();
-            if (motor.isEncendido()) {
-                int rpm = motor.getRPM_MIN();
-            }
             
             int rpm = motor.getRpm();
             
@@ -66,8 +69,6 @@ public class IFrmDash extends javax.swing.JInternalFrame {
         });
         
         prgBarNvlCombustible.setValue(combustible.getPorcentajeActual());
-        motor.encender();
-        temporizador.start();
     }
     
     public void rotarAguja(JLabel lbl, double anguloGrados) {
@@ -194,7 +195,7 @@ public class IFrmDash extends javax.swing.JInternalFrame {
 
         lblVelocidad.setFont(new java.awt.Font("OCR A Extended", 0, 48)); // NOI18N
         lblVelocidad.setForeground(new java.awt.Color(0, 0, 0));
-        lblVelocidad.setText("200km/h");
+        lblVelocidad.setText("0km/h");
         panelVelocimetro.add(lblVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, -1, -1));
 
         lblMarcha.setFont(new java.awt.Font("OCR A Extended", 0, 48)); // NOI18N
@@ -352,7 +353,17 @@ public class IFrmDash extends javax.swing.JInternalFrame {
         return sliderWiperSelector;
     }
 
-    
+    public Motor getMotor() {
+        return motor;
+    }
+
+    public Timer getTemporizador() {
+        return temporizador;
+    }
+
+    public JLabel getLblRpmNeedle() {
+        return lblRpmNeedle;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAcelerador;
