@@ -66,7 +66,7 @@ public class Climatizacion implements Encendible, Cambiable {
     }
     
     public String getModoTemperatura(){
-        if (indiceVelocidad == 0){
+        if (!this.encendido){
             return temperaturasLista[0];
         }
         
