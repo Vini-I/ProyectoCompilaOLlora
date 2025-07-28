@@ -12,18 +12,18 @@ public class Kilometraje {
     private int velocidad;
     private double distanciaMetros;
     private int distanciaKm;
+    private CajaCambios caja;
     
     public void actualizarInfo(double rpm, double tiempoSegundos) {
-        distanciaMetros += rpm * 0.007407 * tiempoSegundos;
+        double velocidadActual = caja.calcularVelocidad((int) rpm);
+        distanciaMetros += (velocidadActual * 1000 / 3600) * tiempoSegundos;
         while (distanciaMetros >= 1000) {
             distanciaKm ++;
             distanciaMetros -= 1000;
         }
         
-        this.velocidad = (int) ((rpm * 1.6) / 60);
+        this.velocidad = (int) (velocidadActual);
     }
-    
-    
     
     public int getVelocidad() {
         return velocidad;
@@ -41,10 +41,11 @@ public class Kilometraje {
         return distanciaKm + (distanciaMetros / 1000.0);
     }
 
-    public Kilometraje() {
+    public Kilometraje(CajaCambios caja) {
         this.distanciaMetros = 0;
         this.distanciaKm = 0;
         this.velocidad = 0;
+        this.caja = caja;
     }
     
     
