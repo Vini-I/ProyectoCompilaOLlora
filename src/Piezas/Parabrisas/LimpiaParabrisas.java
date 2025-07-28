@@ -4,13 +4,14 @@
  */
 package Piezas.Parabrisas;
 
+import Piezas.Cambiable;
 import Piezas.Encendible;
 
 /**
  *
  * @author rodol
  */
-public class LimpiaParabrisas implements Encendible {
+public class LimpiaParabrisas implements Encendible, Cambiable {
     
     private static final String[] velocidadesLista = {"Apagado", "Baja", "Media", "Alta"};
     private int indiceVelocidad;
@@ -22,12 +23,6 @@ public class LimpiaParabrisas implements Encendible {
 
     public int getIndiceVelocidad() {
         return indiceVelocidad;
-    }
-
-    public void setIndiceVelocidad(int indiceVelocidad) {
-        if (indiceVelocidad >= 0 && indiceVelocidad < velocidadesLista.length) {
-            this.indiceVelocidad = indiceVelocidad;
-        }
     }
     
     public String getNombreVelocidad(){
@@ -50,4 +45,10 @@ public class LimpiaParabrisas implements Encendible {
         this.indiceVelocidad = 0;
     }
     
+    @Override
+    public void cambiar(int indiceVelocidad) {
+        if (indiceVelocidad >= 0 && indiceVelocidad < velocidadesLista.length) {
+            this.indiceVelocidad = indiceVelocidad;
+        }
+    }
 }
