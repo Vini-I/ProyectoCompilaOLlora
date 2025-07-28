@@ -15,7 +15,7 @@ public class Radio implements Encendible, Cambiable {
     
     private boolean encendida;
     private int indiceEstaciones;
-    private static final String[] estacionesLista = {"Desconectado", "870 AM", "91.5 FM","93.9 FM"};
+    private static final String[] estacionesLista = {"Desconectado", "870","930","91.5","93.9"};
     private boolean bluetoothActivo;
 
     public boolean isEncendida() {
