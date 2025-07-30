@@ -16,7 +16,7 @@ public class Kilometraje {
     
     public void actualizarInfo(double rpm, double tiempoSegundos) {
         double velocidadActual = caja.calcularVelocidad((int) rpm);
-        distanciaMetros += (velocidadActual * 1000 / 3600) * tiempoSegundos;
+        distanciaMetros += (velocidadActual * 1000 / 360) * tiempoSegundos;
         while (distanciaMetros >= 1000) {
             distanciaKm ++;
             distanciaMetros -= 1000;
