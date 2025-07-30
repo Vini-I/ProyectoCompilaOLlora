@@ -13,7 +13,6 @@ import Piezas.Encendible;
  */
 public class LimpiaParabrisas implements Encendible, Cambiable {
     
-    private static final String[] velocidadesLista = {"Apagado", "Baja", "Media", "Alta"};
     private int indiceVelocidad;
     private boolean encendido;
 
@@ -24,10 +23,6 @@ public class LimpiaParabrisas implements Encendible, Cambiable {
     public int getIndiceVelocidad() {
         return indiceVelocidad;
     }
-    
-    public String getNombreVelocidad(){
-        return velocidadesLista[indiceVelocidad];
-    }
 
     public LimpiaParabrisas() {
         this.indiceVelocidad = 0;
@@ -37,6 +32,7 @@ public class LimpiaParabrisas implements Encendible, Cambiable {
     @Override
     public void encender() {
         this.encendido = true;
+        this.indiceVelocidad = 1;
     }
 
     @Override
@@ -47,7 +43,7 @@ public class LimpiaParabrisas implements Encendible, Cambiable {
     
     @Override
     public void cambiar(int indiceVelocidad) {
-        if (indiceVelocidad >= 0 && indiceVelocidad < velocidadesLista.length) {
+        if (indiceVelocidad >= 1 && indiceVelocidad <= 3) {
             this.indiceVelocidad = indiceVelocidad;
         }
     }
