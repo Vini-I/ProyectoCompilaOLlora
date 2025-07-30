@@ -24,19 +24,19 @@ public class Puerta {
         this.abierta = false;
         this.bloqueada = false;
     }
-    
+
     public void abrir() {
         this.abierta = true;
     }
-    
+
     public void cerrar() {
         this.abierta = false;
     }
-    
+
     public void bloquear() {
         this.bloqueada = true;
     }
-    
+
     public void desbloquear() {
         this.bloqueada = false;
     }
