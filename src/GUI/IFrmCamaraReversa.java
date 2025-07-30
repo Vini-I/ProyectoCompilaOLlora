@@ -93,7 +93,7 @@ private IFrmDash dash;
         }
     
     private void btnReversaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReversaActionPerformed
-        if(!reversa.isActivo()){
+        if(!reversa.isActivo() && dash.getCaja().getMarchaActual() == 1){
             dash.getCaja().bajarMarcha();
             dash.getLblMarcha().setText(dash.getCaja().getMarchaTexto());
             ImageIcon icono = new ImageIcon(getClass().getResource("/Iconos/camaraReversaLibre.png"));
@@ -105,8 +105,10 @@ private IFrmDash dash;
        
             
         } else {
-            dash.getCaja().subirMarcha();
-            dash.getLblMarcha().setText(dash.getCaja().getMarchaTexto());
+            if (dash.getCaja().getMarchaActual() == 0) {
+                dash.getCaja().subirMarcha();
+                dash.getLblMarcha().setText(dash.getCaja().getMarchaTexto());
+            }
              ImageIcon icono = new ImageIcon(getClass().getResource("/Iconos/yotota.png"));
             lblCamara.setIcon(icono);
             reversa.detenerSensor();

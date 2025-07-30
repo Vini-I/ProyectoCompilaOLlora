@@ -5,6 +5,7 @@
 package GUI;
 
 import Piezas.Motor.*;
+import Piezas.Sensores.FrenoMano;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
@@ -12,7 +13,6 @@ import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JSlider;
 import javax.swing.JSpinner;
 import javax.swing.Timer;
 
@@ -28,6 +28,7 @@ public class IFrmDash extends javax.swing.JInternalFrame {
     private Kilometraje kilometraje;
     private final CajaCambios caja;
     private Combustible combustible;
+    private FrenoMano freno;
     /**
      * Creates new form IFrmDash
      */
@@ -39,7 +40,9 @@ public class IFrmDash extends javax.swing.JInternalFrame {
         caja = new CajaCambios();
         combustible = new Combustible();
         kilometraje = new Kilometraje(caja);
+        freno = new FrenoMano();
         motor.apagar();
+        lblParking.setEnabled(true);
         this.temporizador = new Timer(10, (ActionEvent e) -> {
             System.out.println("Temporizador activo, RPM: " + motor.getRpm());
             if (!motor.isEncendido()) return;
@@ -133,6 +136,7 @@ public class IFrmDash extends javax.swing.JInternalFrame {
         btnBajarMarcha = new javax.swing.JButton();
         btnSubirMarcha = new javax.swing.JButton();
         spnrParabrisas = new javax.swing.JSpinner();
+        btnFrenoMano = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(51, 51, 51));
         setBorder(null);
@@ -285,6 +289,14 @@ public class IFrmDash extends javax.swing.JInternalFrame {
         getContentPane().add(btnSubirMarcha, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 0, -1, -1));
         getContentPane().add(spnrParabrisas, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 45, -1, -1));
 
+        btnFrenoMano.setText("Freno de mano");
+        btnFrenoMano.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFrenoManoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnFrenoMano, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 45, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -307,6 +319,16 @@ public class IFrmDash extends javax.swing.JInternalFrame {
         caja.subirMarcha();
         lblMarcha.setText(caja.getMarchaTexto());
     }//GEN-LAST:event_btnSubirMarchaActionPerformed
+
+    private void btnFrenoManoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFrenoManoActionPerformed
+        if (!freno.isActivo()) {
+            freno.activar();
+            lblParking.setEnabled(true);
+        } else {
+            freno.desactivar();
+            lblParking.setEnabled(false);
+        }
+    }//GEN-LAST:event_btnFrenoManoActionPerformed
 
     public CajaCambios getCaja() {
         return caja;
@@ -363,6 +385,7 @@ public class IFrmDash extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAcelerador;
     private javax.swing.JButton btnBajarMarcha;
+    private javax.swing.JButton btnFrenoMano;
     private javax.swing.JButton btnSubirMarcha;
     private javax.swing.JLabel lblCombustible;
     private javax.swing.JLabel lblDerechaOn;
