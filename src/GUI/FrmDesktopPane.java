@@ -21,6 +21,8 @@ public class FrmDesktopPane extends javax.swing.JFrame {
     private IFrmRadioClimatizacion radio;
     private IFrmCamaraReversa reversa;
     private IFrmBotones controles;
+    private IFrmLimpiaParabrisas parabrisas;
+
     /**
      * Creates new form FrmDesktopPane
      */
@@ -28,11 +30,14 @@ public class FrmDesktopPane extends javax.swing.JFrame {
         initComponents();
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(Base, BorderLayout.CENTER);
+        parabrisas = new IFrmLimpiaParabrisas();
 
         SwingUtilities.invokeLater(() -> {
             Rectangle bounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
             setMaximizedBounds(bounds);
             setExtendedState(JFrame.MAXIMIZED_BOTH);
+            Base.add(parabrisas);
+            parabrisas.setVisible(true);
 
             Base.setPreferredSize(new Dimension(bounds.width, bounds.height));
             Base.setBounds(0, 0, bounds.width, bounds.height);
