@@ -17,7 +17,7 @@ public class Climatizacion implements Encendible, Cambiable {
     private int limiteTemperatura;
     private int indiceVelocidad;
     private static final String[] velocidadesLista = {"Apagado", "Baja", "Media", "Alta", "Muy Alta", "Maxima"};
-    private static final String[] temperaturasLista = {"Apagado", "Aire Acondicionado", "Ambiente", "Calefaccion"};
+    private static final String[] temperaturasLista = {"Apagado", "A/C", "Calefaccion"};
 
     public boolean isEncendido() {
         return encendido;
@@ -32,14 +32,14 @@ public class Climatizacion implements Encendible, Cambiable {
     }
 
     public void setLimiteTemperatura(int limiteTemperatura) {
-        if (limiteTemperatura >= 18 && limiteTemperatura <= 35) {
+        if (limiteTemperatura >= 18 && limiteTemperatura <= 23) {
             this.limiteTemperatura = limiteTemperatura;
         }
     }
 
     public Climatizacion() {
         this.encendido = false;
-        this.limiteTemperatura = 24;
+        this.limiteTemperatura = 18;
         this.indiceVelocidad = 0;
     }
 
@@ -70,14 +70,12 @@ public class Climatizacion implements Encendible, Cambiable {
             return temperaturasLista[0];
         }
         
-        if (limiteTemperatura >= 18 && limiteTemperatura <= 22) {
+        if (limiteTemperatura >= 18 && limiteTemperatura <= 20) {
             return temperaturasLista[1];
-        } else if (limiteTemperatura >= 23 && limiteTemperatura <= 29) {
+        } else if (limiteTemperatura >= 21 && limiteTemperatura <= 23) {
             return temperaturasLista[2];
-        } else if (limiteTemperatura >= 30 && limiteTemperatura <= 35) {
-            return temperaturasLista[3];
         }else{
-            return null;
+            return temperaturasLista[0];
         }
     }
     
