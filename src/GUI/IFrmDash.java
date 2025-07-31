@@ -69,11 +69,9 @@ public class IFrmDash extends javax.swing.JInternalFrame {
             
             int metros = (int) (kilometraje.getDistanciaMetros() / 100);
             lblMetros.setText(Integer.toString(metros));
-            System.out.println("Metros actualizados " + kilometraje.getDistanciaMetros());
             
             int km = (int) (kilometraje.getDistanciaKm());
-            lblKm.setText(String.format("%05d", km));
-            System.out.println("Km actualizados " + kilometraje.getDistanciaKm());
+            lblKm.setText(String.format("%06d", km));
             
             combustible.consumir(rpm, motor.getCc(), 170);
             prgBarNvlCombustible.setValue(combustible.getPorcentajeActual());
@@ -356,9 +354,11 @@ public class IFrmDash extends javax.swing.JInternalFrame {
         
         if (valorSpinner == 0) {
             parabrisas.apagar();
+            lblWindshieldIcon.setEnabled(false);
             parabrisasGUI.getlblLimpiaParabrisas().setIcon(iconoParabrisasState1);
         } else if (valorSpinner == 1) {
            parabrisas.encender();
+           lblWindshieldIcon.setEnabled(true);
            parabrisas.cambiar(valorSpinner);
            
              timerParabrisas = new Timer(3000, new ActionListener() {

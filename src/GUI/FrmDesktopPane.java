@@ -30,7 +30,6 @@ public class FrmDesktopPane extends javax.swing.JFrame {
         initComponents();
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(Base, BorderLayout.CENTER);
-        parabrisas = new IFrmLimpiaParabrisas();
 
         SwingUtilities.invokeLater(() -> {
             Rectangle bounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
@@ -50,6 +49,7 @@ public class FrmDesktopPane extends javax.swing.JFrame {
     
     private void agregarInternalFrames() {
         dash = new IFrmDash();
+        parabrisas = new IFrmLimpiaParabrisas();
         radio = new IFrmRadioClimatizacion();
         controles = new IFrmBotones(dash);
         reversa = new IFrmCamaraReversa(dash);
