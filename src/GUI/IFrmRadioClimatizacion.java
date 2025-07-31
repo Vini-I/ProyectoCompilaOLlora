@@ -16,8 +16,11 @@ import javax.swing.JSpinner;
  * @author rodol
  */
 public class IFrmRadioClimatizacion extends javax.swing.JInternalFrame {
+
     private Radio radio;
     private Climatizacion climatizacion;
+    private ImageIcon iconoCircleBlue;
+    private ImageIcon iconoCircleRed;
 
     /**
      * Creates new form Radio
@@ -26,31 +29,29 @@ public class IFrmRadioClimatizacion extends javax.swing.JInternalFrame {
         initComponents();
         radio = new Radio();
         climatizacion = new Climatizacion();
+        iconoCircleBlue = new ImageIcon(getClass().getResource("/Iconos/circleBlue.png"));
+        iconoCircleRed = new ImageIcon(getClass().getResource("/Iconos/circleRed.png"));
         inicializar();
-        
     }
-    
-    private void inicializar(){
+
+    private void inicializar() {
         btnBluetooth.setEnabled(radio.isEncendida());
         btnAMOn.setEnabled(radio.isEncendida());
         btnFMOn.setEnabled(radio.isEncendida());
         txtRadio.setText(radio.getNombreEstaciones());
         jslCiclar.setValue(radio.getIndiceEstaciones());
-        jslCiclar.setEnabled(false);
-        jslCiclar.setValueIsAdjusting(false);
-        
-        
+        jslCiclar.setEnabled(radio.isEncendida());
+
         jspVelocidad.setValue(climatizacion.getIndiceVelocidad());
-        txtVelocidad.setText(climatizacion.getNombreVelocidades());  
+        txtVelocidad.setText(climatizacion.getNombreVelocidades());
         JComponent editor = jspVelocidad.getEditor();
         JFormattedTextField spinner = ((JSpinner.DefaultEditor) editor).getTextField();
         spinner.setEditable(false);
-        
-        jspTemperatura.setEnabled(false);
-        jspTemperatura.setValue(24);
+
+        jspTemperatura.setEnabled(climatizacion.isEncendido());
         lblIconoTemperatura.setEnabled(climatizacion.isEncendido());
         lblTemperaturaTitulo.setEnabled(climatizacion.isEncendido());
-        lblTemperatura.setText(climatizacion.getModoTemperatura());
+        lblTipoTemperatura.setVisible(climatizacion.isEncendido());
     }
 
     /**
@@ -79,37 +80,44 @@ public class IFrmRadioClimatizacion extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         lblCircles = new javax.swing.JLabel();
         btnEstadoRadio = new javax.swing.JButton();
-        lblTemperatura = new javax.swing.JLabel();
         btnBluetooth = new javax.swing.JToggleButton();
         lblEstadoBluetooth = new javax.swing.JLabel();
+        lblTipoTemperatura = new javax.swing.JLabel();
 
         setMinimumSize(new java.awt.Dimension(480, 360));
         setPreferredSize(new java.awt.Dimension(432, 360));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTipoEstacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/off.png"))); // NOI18N
         lblTipoEstacion.setPreferredSize(new java.awt.Dimension(38, 39));
+        getContentPane().add(lblTipoEstacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 62, 108, 10));
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, 10, 130));
+        getContentPane().add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 129, 420, 10));
 
         jslCiclar.setMajorTickSpacing(1);
         jslCiclar.setMaximum(4);
+        jslCiclar.setMinimum(1);
         jslCiclar.setMinorTickSpacing(1);
         jslCiclar.setPaintLabels(true);
         jslCiclar.setPaintTicks(true);
         jslCiclar.setSnapToTicks(true);
         jslCiclar.setToolTipText("");
-        jslCiclar.setValue(0);
         jslCiclar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jslCiclar.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jslCiclarStateChanged(evt);
             }
         });
+        getContentPane().add(jslCiclar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, -1, -1));
 
         txtVelocidad.setEditable(false);
         txtVelocidad.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtVelocidad.setForeground(new java.awt.Color(0, 0, 0));
         txtVelocidad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        getContentPane().add(txtVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 270, -1));
 
         btnAMOn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/am(1).png"))); // NOI18N
         btnAMOn.addActionListener(new java.awt.event.ActionListener() {
@@ -117,6 +125,7 @@ public class IFrmRadioClimatizacion extends javax.swing.JInternalFrame {
                 btnAMOnActionPerformed(evt);
             }
         });
+        getContentPane().add(btnAMOn, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, -1, -1));
 
         btnFMOn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/fm(1).png"))); // NOI18N
         btnFMOn.addActionListener(new java.awt.event.ActionListener() {
@@ -124,6 +133,7 @@ public class IFrmRadioClimatizacion extends javax.swing.JInternalFrame {
                 btnFMOnActionPerformed(evt);
             }
         });
+        getContentPane().add(btnFMOn, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, -1, -1));
 
         jspVelocidad.setModel(new javax.swing.SpinnerNumberModel(0, 0, 5, 1));
         jspVelocidad.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -132,32 +142,40 @@ public class IFrmRadioClimatizacion extends javax.swing.JInternalFrame {
                 jspVelocidadStateChanged(evt);
             }
         });
+        getContentPane().add(jspVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, -1, -1));
 
-        jspTemperatura.setModel(new javax.swing.SpinnerNumberModel(24, 18, 35, 1));
+        jspTemperatura.setModel(new javax.swing.SpinnerNumberModel(18, 18, 23, 1));
         jspTemperatura.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jspTemperaturaStateChanged(evt);
             }
         });
+        getContentPane().add(jspTemperatura, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 190, -1, -1));
 
         lblTemperaturaTitulo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblTemperaturaTitulo.setForeground(new java.awt.Color(0, 0, 0));
         lblTemperaturaTitulo.setText("Temperatura");
+        getContentPane().add(lblTemperaturaTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 150, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Velocidad");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, -1, -1));
 
         txtRadio.setEditable(false);
         txtRadio.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtRadio.setForeground(new java.awt.Color(0, 0, 0));
         txtRadio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        getContentPane().add(txtRadio, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 270, -1));
 
         lblIconoTemperatura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/thermometer.png"))); // NOI18N
+        getContentPane().add(lblIconoTemperatura, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, -1, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/speedometer.png"))); // NOI18N
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
 
-        lblCircles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/circleWhite.png"))); // NOI18N
+        lblCircles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/AC_mitad.png"))); // NOI18N
+        getContentPane().add(lblCircles, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
 
         btnEstadoRadio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/botonEncendido.png"))); // NOI18N
         btnEstadoRadio.addActionListener(new java.awt.event.ActionListener() {
@@ -165,8 +183,7 @@ public class IFrmRadioClimatizacion extends javax.swing.JInternalFrame {
                 btnEstadoRadioActionPerformed(evt);
             }
         });
-
-        lblTemperatura.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        getContentPane().add(btnEstadoRadio, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, -1, -1));
 
         btnBluetooth.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/bluetooth.png"))); // NOI18N
         btnBluetooth.addActionListener(new java.awt.event.ActionListener() {
@@ -174,116 +191,15 @@ public class IFrmRadioClimatizacion extends javax.swing.JInternalFrame {
                 btnBluetoothActionPerformed(evt);
             }
         });
+        getContentPane().add(btnBluetooth, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 80, 44, -1));
 
         lblEstadoBluetooth.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/switch-off.png"))); // NOI18N
+        getContentPane().add(lblEstadoBluetooth, new org.netbeans.lib.awtextra.AbsoluteConstraints(62, 84, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(lblTipoEstacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
-                .addComponent(txtRadio, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(150, 150, 150)
-                .addComponent(jslCiclar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(jLabel2)
-                .addGap(111, 111, 111)
-                .addComponent(lblTemperaturaTitulo))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jLabel4)
-                .addGap(8, 8, 8)
-                .addComponent(jspVelocidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66)
-                .addComponent(lblIconoTemperatura)
-                .addGap(8, 8, 8)
-                .addComponent(jspTemperatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(lblCircles)
-                .addGap(26, 26, 26)
-                .addComponent(txtVelocidad, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnBluetooth, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblEstadoBluetooth)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(130, 130, 130)
-                        .addComponent(btnFMOn))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(btnAMOn))
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(200, 200, 200)
-                        .addComponent(btnEstadoRadio))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(txtRadio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
-                        .addComponent(btnFMOn))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
-                        .addComponent(btnAMOn))
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
-                        .addComponent(btnEstadoRadio))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jslCiclar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(lblTipoEstacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(3, 3, 3)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblEstadoBluetooth)
-                        .addGap(13, 13, 13)
-                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addComponent(btnBluetooth)))
-                .addGap(1, 1, 1)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(lblTemperaturaTitulo)))
-                .addGap(8, 8, 8)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(lblIconoTemperatura)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jspVelocidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jspTemperatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(8, 8, 8)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblCircles)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(txtVelocidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-        );
+        lblTipoTemperatura.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lblTipoTemperatura.setForeground(new java.awt.Color(0, 0, 0));
+        lblTipoTemperatura.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(lblTipoTemperatura, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 80, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -293,12 +209,12 @@ public class IFrmRadioClimatizacion extends javax.swing.JInternalFrame {
         if (!radio.isBluetoothActivo()) {
             lblTipoEstacion.setIcon(iconoFM);
             jslCiclar.setEnabled(true);
-             jslCiclar.setValue(1);
+            jslCiclar.setValue(1);
         }
     }//GEN-LAST:event_btnFMOnActionPerformed
 
     private void btnAMOnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAMOnActionPerformed
-          ImageIcon iconoAM = new ImageIcon(getClass().getResource("/Iconos/am(1).png"));
+        ImageIcon iconoAM = new ImageIcon(getClass().getResource("/Iconos/am(1).png"));
         if (!radio.isBluetoothActivo()) {
             lblTipoEstacion.setIcon(iconoAM);
             jslCiclar.setEnabled(true);
@@ -307,115 +223,118 @@ public class IFrmRadioClimatizacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnAMOnActionPerformed
 
     private void btnBluetoothActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBluetoothActionPerformed
-        ImageIcon iconoBluetoothOn = new ImageIcon(getClass().getResource("/Iconos/bluetooth.png"));
-        ImageIcon iconoBluetoothOff = new ImageIcon(getClass().getResource("/Iconos/deactivate.png"));
-        ImageIcon iconoOfff = new ImageIcon(getClass().getResource("/Iconos/switch-off.png"));
-        ImageIcon iconoOn = new ImageIcon(getClass().getResource("/Iconos/switch-on.png"));
-        ImageIcon iconoOff = new ImageIcon(getClass().getResource("/Iconos/off.png"));
-        if (!radio.isBluetoothActivo()){
+        ImageIcon labelOff = new ImageIcon(getClass().getResource("/Iconos/switch-off.png"));
+        ImageIcon labelOn = new ImageIcon(getClass().getResource("/Iconos/switch-on.png"));
+
+        if (!radio.isBluetoothActivo()) {
             radio.activarBluetooth();
-            btnBluetooth.setIcon(iconoBluetoothOff);
-            lblTipoEstacion.setIcon(iconoOff);
-            jslCiclar.setValue(0);
-            radio.cambiar(jslCiclar.getValue());
-            txtRadio.setText(radio.getNombreEstaciones());
-            jslCiclar.setEnabled(false);
-            lblEstadoBluetooth.setIcon(iconoOn);
-        }else{
+            jslCiclar.setEnabled(!radio.isBluetoothActivo());
+            lblEstadoBluetooth.setIcon(labelOn);
+        } else {
             radio.desactivarBluetooth();
-            btnBluetooth.setIcon(iconoBluetoothOn);
-            lblEstadoBluetooth.setIcon(iconoOfff);
+            lblEstadoBluetooth.setIcon(labelOff);
+            jslCiclar.setEnabled(!radio.isBluetoothActivo());
+
         }
     }//GEN-LAST:event_btnBluetoothActionPerformed
 
     private void btnEstadoRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstadoRadioActionPerformed
         ImageIcon iconoOff = new ImageIcon(getClass().getResource("/Iconos/off.png"));
         ImageIcon iconoBluetoothOn = new ImageIcon(getClass().getResource("/Iconos/bluetooth.png"));
-        ImageIcon iconoOfff = new ImageIcon(getClass().getResource("/Iconos/switch-off.png"));
-        if(!radio.isEncendida()){
+        ImageIcon labelOff = new ImageIcon(getClass().getResource("/Iconos/switch-off.png"));
+        ImageIcon iconoFM = new ImageIcon(getClass().getResource("/Iconos/fm(1).png"));
+
+        if (!radio.isEncendida()) {
             radio.encender();
-            btnBluetooth.setEnabled(radio.isEncendida());
-            btnAMOn.setEnabled(radio.isEncendida());
-            btnFMOn.setEnabled(radio.isEncendida());
+            lblTipoEstacion.setIcon(iconoFM);
+            actualizarEstadoRadio();
+            ciclarSpinner();
         } else {
             radio.apagar();
             lblTipoEstacion.setIcon(iconoOff);
             radio.desactivarBluetooth();
             btnBluetooth.setIcon(iconoBluetoothOn);
-            btnBluetooth.setSelected(false);
-            btnBluetooth.setEnabled(radio.isEncendida());
-            lblEstadoBluetooth.setIcon(iconoOfff);
-            btnAMOn.setEnabled(radio.isEncendida());
-            btnFMOn.setEnabled(radio.isEncendida());
-            txtRadio.setText(radio.getNombreEstaciones());
-            jslCiclar.setValue(radio.getIndiceEstaciones());
-            jslCiclar.setEnabled(false);
+            btnBluetooth.setSelected(radio.isEncendida());
+            lblEstadoBluetooth.setIcon(labelOff);
+            actualizarEstadoRadio();
+            jslCiclar.setEnabled(radio.isEncendida());
         }
     }//GEN-LAST:event_btnEstadoRadioActionPerformed
 
     private void jslCiclarStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jslCiclarStateChanged
-        if (radio.isEncendida() && !radio.isBluetoothActivo()){
-            int estaciones = jslCiclar.getValue();
-            System.out.println("estaciones " + estaciones);
-            radio.cambiar(estaciones);
-            txtRadio.setText(radio.getNombreEstaciones());
-        } 
-        
-        if (radio.getIndiceEstaciones() == 0){
-            ImageIcon iconoOff = new ImageIcon(getClass().getResource("/Iconos/off.png"));
-            lblTipoEstacion.setIcon(iconoOff);
-            jslCiclar.setEnabled(false);
-        }
+        ciclarSpinner();
     }//GEN-LAST:event_jslCiclarStateChanged
 
     private void jspVelocidadStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jspVelocidadStateChanged
+        ImageIcon iconoHalfCircle = new ImageIcon(getClass().getResource("/Iconos/AC_mitad.png"));
         int indiceVelocidad = Integer.parseInt(jspVelocidad.getValue().toString());
         int indiceTemperatura = Integer.parseInt(jspTemperatura.getValue().toString());
-        if (indiceVelocidad > 0){
+
+        if (indiceVelocidad > 0) {
             climatizacion.encender();
             jspTemperatura.setEnabled(climatizacion.isEncendido());
             lblIconoTemperatura.setEnabled(climatizacion.isEncendido());
             lblTemperaturaTitulo.setEnabled(climatizacion.isEncendido());
             climatizacion.setLimiteTemperatura(indiceTemperatura);
-            lblTemperatura.setText(climatizacion.getModoTemperatura());
-        }else if (indiceVelocidad == 0){
+            lblTipoTemperatura.setVisible(climatizacion.isEncendido());
+            lblTipoTemperatura.setText(climatizacion.getModoTemperatura());
+            lblCircles.setIcon(iconoCircleBlue);
+        } else if (indiceVelocidad == 0) {
             climatizacion.apagar();
-            jspTemperatura.setValue(24);
-            jspTemperatura.setEnabled(false);
-            climatizacion.setLimiteTemperatura(24);
-            lblTemperatura.setText(climatizacion.getModoTemperatura());
+            jspTemperatura.setValue(18);
+            jspTemperatura.setEnabled(climatizacion.isEncendido());
+            lblTipoTemperatura.setVisible(climatizacion.isEncendido());
             txtVelocidad.setText(climatizacion.getNombreVelocidades());
+            lblCircles.setIcon(iconoHalfCircle);
         }
-      
-        if (climatizacion.isEncendido()){
+
+        if (climatizacion.isEncendido()) {
             climatizacion.cambiar(indiceVelocidad);
             txtVelocidad.setText(climatizacion.getNombreVelocidades());
         }
-        
     }//GEN-LAST:event_jspVelocidadStateChanged
 
     private void jspTemperaturaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jspTemperaturaStateChanged
-        if (climatizacion.isEncendido()){
-            jspTemperatura.setEnabled(true);
-        }else{
-            jspTemperatura.setEnabled(true);
+        if (climatizacion.isEncendido()) {
+            jspTemperatura.setEnabled(climatizacion.isEncendido());
+        } else {
+            jspTemperatura.setEnabled(climatizacion.isEncendido());
         }
+
         int indice = Integer.parseInt(jspTemperatura.getValue().toString());
         climatizacion.setLimiteTemperatura(indice);
-        lblTemperatura.setText(climatizacion.getModoTemperatura());
-        
-        if (climatizacion.getLimiteTemperatura() >= 18 && climatizacion.getLimiteTemperatura() <= 22){
-            ImageIcon iconoCircleBlue = new ImageIcon(getClass().getResource("/Iconos/circleBlue.png"));
+
+        if (climatizacion.getLimiteTemperatura() >= 18 && climatizacion.getLimiteTemperatura() <= 20) {
             lblCircles.setIcon(iconoCircleBlue);
-        }else if (climatizacion.getLimiteTemperatura() >= 23 && climatizacion.getLimiteTemperatura() <= 29){
-            ImageIcon iconoCircleWhite = new ImageIcon(getClass().getResource("/Iconos/circleWhite.png"));
-            lblCircles.setIcon(iconoCircleWhite); 
-        }else if (climatizacion.getLimiteTemperatura() >= 30 && climatizacion.getLimiteTemperatura() <= 35) {
-                ImageIcon iconoCircleRed = new ImageIcon(getClass().getResource("/Iconos/circleRed.png"));
+            lblTipoTemperatura.setText(climatizacion.getModoTemperatura());
+        } else {
             lblCircles.setIcon(iconoCircleRed);
+            lblTipoTemperatura.setText(climatizacion.getModoTemperatura());
+
         }
-        
+
     }//GEN-LAST:event_jspTemperaturaStateChanged
+
+    private void ciclarSpinner() {
+        if (radio.isEncendida()) {
+            int estaciones = jslCiclar.getValue();
+            radio.cambiar(estaciones);
+            txtRadio.setText(radio.getNombreEstaciones());
+        }
+    }
+
+    private void actualizarEstadoRadio() {
+        boolean radioEncendida = radio.isEncendida();
+        btnBluetooth.setEnabled(radioEncendida);
+        btnAMOn.setEnabled(radioEncendida);
+        btnFMOn.setEnabled(radioEncendida);
+        jslCiclar.setEnabled(radioEncendida);
+
+        if (!radioEncendida) {
+            jslCiclar.setValue(1);
+            txtRadio.setText(radio.getNombreEstaciones());
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -434,9 +353,9 @@ public class IFrmRadioClimatizacion extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblCircles;
     private javax.swing.JLabel lblEstadoBluetooth;
     private javax.swing.JLabel lblIconoTemperatura;
-    private javax.swing.JLabel lblTemperatura;
     private javax.swing.JLabel lblTemperaturaTitulo;
     private javax.swing.JLabel lblTipoEstacion;
+    private javax.swing.JLabel lblTipoTemperatura;
     private javax.swing.JTextField txtRadio;
     private javax.swing.JTextField txtVelocidad;
     // End of variables declaration//GEN-END:variables
