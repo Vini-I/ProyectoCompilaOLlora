@@ -69,13 +69,13 @@ public class IFrmBotones extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         btnDirIzq = new javax.swing.JButton();
-        btnCinIzq = new javax.swing.JButton();
         btnDirDer = new javax.swing.JButton();
-        btnCinDer = new javax.swing.JButton();
         btnEmer = new javax.swing.JButton();
         tglBtnAlta = new javax.swing.JToggleButton();
         tglBtnBaja = new javax.swing.JToggleButton();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        tglBtnLuces = new javax.swing.JToggleButton();
+        tglBtnLeftSeat = new javax.swing.JToggleButton();
+        tglBtnRightSeat = new javax.swing.JToggleButton();
 
         btnDirIzq.setBackground(new java.awt.Color(153, 153, 153));
         btnDirIzq.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/left-arrow.png"))); // NOI18N
@@ -85,27 +85,11 @@ public class IFrmBotones extends javax.swing.JInternalFrame {
             }
         });
 
-        btnCinIzq.setBackground(new java.awt.Color(153, 153, 153));
-        btnCinIzq.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/seatLeft.png"))); // NOI18N
-        btnCinIzq.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCinIzqActionPerformed(evt);
-            }
-        });
-
         btnDirDer.setBackground(new java.awt.Color(153, 153, 153));
         btnDirDer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/right-arrow.png"))); // NOI18N
         btnDirDer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDirDerActionPerformed(evt);
-            }
-        });
-
-        btnCinDer.setBackground(new java.awt.Color(153, 153, 153));
-        btnCinDer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/seatRight.png"))); // NOI18N
-        btnCinDer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCinDerActionPerformed(evt);
             }
         });
 
@@ -133,11 +117,27 @@ public class IFrmBotones extends javax.swing.JInternalFrame {
             }
         });
 
-        jToggleButton1.setBackground(new java.awt.Color(153, 153, 153));
-        jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/parking-lights.png"))); // NOI18N
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        tglBtnLuces.setBackground(new java.awt.Color(153, 153, 153));
+        tglBtnLuces.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/parking-lights.png"))); // NOI18N
+        tglBtnLuces.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                tglBtnLucesActionPerformed(evt);
+            }
+        });
+
+        tglBtnLeftSeat.setBackground(new java.awt.Color(153, 153, 153));
+        tglBtnLeftSeat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/seatLeft.png"))); // NOI18N
+        tglBtnLeftSeat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tglBtnLeftSeatActionPerformed(evt);
+            }
+        });
+
+        tglBtnRightSeat.setBackground(new java.awt.Color(153, 153, 153));
+        tglBtnRightSeat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/seatRight.png"))); // NOI18N
+        tglBtnRightSeat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tglBtnRightSeatActionPerformed(evt);
             }
         });
 
@@ -149,23 +149,23 @@ public class IFrmBotones extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tglBtnLuces, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnEmer, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnDirIzq, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnDirDer, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 2, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(tglBtnAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(tglBtnBaja, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnCinIzq, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnDirIzq, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDirDer, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 2, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(tglBtnLeftSeat, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCinDer, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(tglBtnRightSeat, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,31 +177,20 @@ public class IFrmBotones extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnEmer, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tglBtnLuces, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(tglBtnAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tglBtnBaja, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCinIzq, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCinDer, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(52, 52, 52))
+                    .addComponent(tglBtnRightSeat, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tglBtnLeftSeat, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(55, 55, 55))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnCinIzqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCinIzqActionPerformed
-       if (!freno.isActivo()) {
-            freno.activar();
-            lblParking.setEnabled(true);
-        } else {
-            freno.desactivar();
-            lblParking.setEnabled(false);
-        }
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCinIzqActionPerformed
 
     private void btnDirIzqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDirIzqActionPerformed
         if (!dirIzq.isActiva()) {
@@ -261,17 +250,6 @@ public class IFrmBotones extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnDirDerActionPerformed
 
-    private void btnCinDerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCinDerActionPerformed
-       if (!freno.isActivo()) {
-            freno.activar();
-            lblParking.setEnabled(true);
-        } else {
-            freno.desactivar();
-            lblParking.setEnabled(false);
-        }
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCinDerActionPerformed
-
     private void tglBtnAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tglBtnAltaActionPerformed
         if (!luz.isIntensidadLuz()) {
             tglBtnBaja.setSelected(false);
@@ -294,7 +272,7 @@ public class IFrmBotones extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_tglBtnBajaActionPerformed
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+    private void tglBtnLucesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tglBtnLucesActionPerformed
         if (!luz.isActiva()) {
             luz.activar();
             if (!luz.isIntensidadLuz()) dash.getLblLuzBaja().setEnabled(true);
@@ -304,17 +282,37 @@ public class IFrmBotones extends javax.swing.JInternalFrame {
             if (!luz.isIntensidadLuz()) dash.getLblLuzBaja().setEnabled(false);
             else dash.getLblLuzAlta().setEnabled(false);
         }
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+    }//GEN-LAST:event_tglBtnLucesActionPerformed
+
+    private void tglBtnLeftSeatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tglBtnLeftSeatActionPerformed
+       if (!cintuIzq.isPuesto()) {
+           cintuIzq.poner();
+           dash.getLblSeatbeltD().setEnabled(true);
+       } else {
+           cintuIzq.quitar();
+           dash.getLblSeatbeltD().setEnabled(false);
+       }
+    }//GEN-LAST:event_tglBtnLeftSeatActionPerformed
+
+    private void tglBtnRightSeatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tglBtnRightSeatActionPerformed
+        if (!cintuDer.isPuesto()) {
+           cintuDer.poner();
+           dash.getLblSeatbeltP().setEnabled(true);
+       } else {
+           cintuDer.quitar();
+           dash.getLblSeatbeltP().setEnabled(false);
+       }
+    }//GEN-LAST:event_tglBtnRightSeatActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCinDer;
-    private javax.swing.JButton btnCinIzq;
     private javax.swing.JButton btnDirDer;
     private javax.swing.JButton btnDirIzq;
     private javax.swing.JButton btnEmer;
-    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton tglBtnAlta;
     private javax.swing.JToggleButton tglBtnBaja;
+    private javax.swing.JToggleButton tglBtnLeftSeat;
+    private javax.swing.JToggleButton tglBtnLuces;
+    private javax.swing.JToggleButton tglBtnRightSeat;
     // End of variables declaration//GEN-END:variables
 }
