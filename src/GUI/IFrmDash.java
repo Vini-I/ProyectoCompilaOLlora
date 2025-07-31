@@ -5,11 +5,13 @@
 package GUI;
 
 import Piezas.Motor.*;
+import Piezas.Parabrisas.LimpiaParabrisas;
 import Piezas.Sensores.FrenoMano;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -25,10 +27,14 @@ public class IFrmDash extends javax.swing.JInternalFrame {
     private final Image agujaOriginal;
     private final Motor motor;
     private final Timer temporizador;
+    private Timer timerParabrisas;
+    private boolean estadoParabrisas = true;
     private Kilometraje kilometraje;
     private final CajaCambios caja;
     private Combustible combustible;
     private FrenoMano freno;
+    private IFrmLimpiaParabrisas parabrisasGUI;
+    private LimpiaParabrisas parabrisas;
     /**
      * Creates new form IFrmDash
      */
@@ -41,6 +47,8 @@ public class IFrmDash extends javax.swing.JInternalFrame {
         combustible = new Combustible();
         kilometraje = new Kilometraje(caja);
         freno = new FrenoMano();
+        parabrisasGUI = new IFrmLimpiaParabrisas();
+        parabrisas = new LimpiaParabrisas();
         motor.apagar();
         lblParking.setEnabled(true);
         this.temporizador = new Timer(10, (ActionEvent e) -> {
@@ -287,6 +295,14 @@ public class IFrmDash extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(btnSubirMarcha, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 0, -1, -1));
+
+        spnrParabrisas.setModel(new javax.swing.SpinnerNumberModel(0, 0, 3, 1));
+        spnrParabrisas.setEditor(new javax.swing.JSpinner.NumberEditor(spnrParabrisas, ""));
+        spnrParabrisas.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                spnrParabrisasStateChanged(evt);
+            }
+        });
         getContentPane().add(spnrParabrisas, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 45, -1, -1));
 
         btnFrenoMano.setText("Freno de mano");
@@ -329,6 +345,70 @@ public class IFrmDash extends javax.swing.JInternalFrame {
             lblParking.setEnabled(false);
         }
     }//GEN-LAST:event_btnFrenoManoActionPerformed
+
+    private void spnrParabrisasStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnrParabrisasStateChanged
+        ImageIcon iconoParabrisasState1 = new ImageIcon(getClass().getResource("/Iconos/LimpiaParabrisas.png"));
+        ImageIcon iconoParabrisasState2 = new ImageIcon(getClass().getResource("/Iconos/LimpiaParabrisas2.png"));
+        int valorSpinner = Integer.parseInt(spnrParabrisas.getValue().toString());
+        
+        if (timerParabrisas != null) {
+            timerParabrisas.stop();
+        }
+        
+        if (valorSpinner == 0) {
+            parabrisas.apagar();
+            parabrisasGUI.getlblLimpiaParabrisas().setIcon(iconoParabrisasState1);
+        } else if (valorSpinner == 1) {
+           parabrisas.encender();
+           parabrisas.cambiar(valorSpinner);
+           
+             timerParabrisas = new Timer(3000, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (estadoParabrisas) {
+                        System.out.println(estadoParabrisas);
+                        parabrisasGUI.getlblLimpiaParabrisas().setIcon(iconoParabrisasState2);
+                    } else {
+                        System.out.println(estadoParabrisas);
+                        parabrisasGUI.getlblLimpiaParabrisas().setIcon(iconoParabrisasState1);
+                    }
+                    estadoParabrisas = !estadoParabrisas;
+                }
+            });
+            timerParabrisas.start();
+        }else if (valorSpinner == 2){
+             timerParabrisas = new Timer(1000, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (estadoParabrisas) {
+                        System.out.println(estadoParabrisas);
+                        parabrisasGUI.getlblLimpiaParabrisas().setIcon(iconoParabrisasState2);
+                    } else {
+                        System.out.println(estadoParabrisas);
+                        parabrisasGUI.getlblLimpiaParabrisas().setIcon(iconoParabrisasState1);
+                    }
+                    estadoParabrisas = !estadoParabrisas;
+                }
+            });
+            timerParabrisas.start();
+        }else{
+             timerParabrisas = new Timer(500, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (estadoParabrisas) {
+                        System.out.println(estadoParabrisas);
+                        parabrisasGUI.getlblLimpiaParabrisas().setIcon(iconoParabrisasState2);
+                    } else {
+                        System.out.println(estadoParabrisas);
+                        parabrisasGUI.getlblLimpiaParabrisas().setIcon(iconoParabrisasState1);
+                    }
+                    estadoParabrisas = !estadoParabrisas;
+                }
+            });
+            timerParabrisas.start();
+        }
+
+    }//GEN-LAST:event_spnrParabrisasStateChanged
 
     public CajaCambios getCaja() {
         return caja;
