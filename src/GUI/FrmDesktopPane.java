@@ -20,6 +20,7 @@ public class FrmDesktopPane extends javax.swing.JFrame {
     private IFrmPuertas puerta;
     private IFrmRadioClimatizacion radio;
     private IFrmCamaraReversa reversa;
+    private IFrmBotones controles;
     /**
      * Creates new form FrmDesktopPane
      */
@@ -45,6 +46,7 @@ public class FrmDesktopPane extends javax.swing.JFrame {
     private void agregarInternalFrames() {
         dash = new IFrmDash();
         radio = new IFrmRadioClimatizacion();
+        controles = new IFrmBotones(dash);
         reversa = new IFrmCamaraReversa(dash);
         puerta = new IFrmPuertas(dash);
         
@@ -63,6 +65,9 @@ public class FrmDesktopPane extends javax.swing.JFrame {
         Base.add(radio);
         radio.setVisible(true);
         radio.setLocation(reversa.getX() + reversa.getWidth(), Base.getHeight() - radio.getHeight());
+        
+        Base.add(controles);
+        controles.setVisible(true);
     }
 
     /**

@@ -11,6 +11,7 @@ package Piezas.Luces;
 public class LuzIntermitente {
     
     private int intervaloMilisegundos;
+    private boolean activa;
     private Luz estadoLuz;
     
 
@@ -21,6 +22,19 @@ public class LuzIntermitente {
     public LuzIntermitente() {
         this.intervaloMilisegundos = 1000;
         this.estadoLuz = new Luz();
+        this.activa = false;
+    }
+    
+    public void activar() {
+        this.activa = true;
+    }
+    
+    public void desactivar() {
+        this.activa = false;
+    }
+
+    public boolean isActiva() {
+        return activa;
     }
     
     public void alternarEstado(){

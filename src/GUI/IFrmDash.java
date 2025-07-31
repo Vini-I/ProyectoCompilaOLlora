@@ -44,7 +44,6 @@ public class IFrmDash extends javax.swing.JInternalFrame {
         motor.apagar();
         lblParking.setEnabled(true);
         this.temporizador = new Timer(10, (ActionEvent e) -> {
-            System.out.println("Temporizador activo, RPM: " + motor.getRpm());
             if (!motor.isEncendido()) return;
             
             motor.actualizarRPM();

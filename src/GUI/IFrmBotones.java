@@ -4,17 +4,58 @@
  */
 package GUI;
 
+import Piezas.Luces.LuzCarro;
+import Piezas.Luces.LuzIntermitente;
+import Piezas.Seguridad.Cinturon;
+import java.awt.event.ActionEvent;
+import javax.swing.Timer;
+
 /**
  *
  * @author llean
  */
 public class IFrmBotones extends javax.swing.JInternalFrame {
-
+    private Timer tempDir;
+    private IFrmDash dash;
+    private LuzIntermitente dirIzq;
+    private LuzIntermitente dirDer;
+    private LuzCarro luz;
+    private Cinturon cintuIzq;
+    private Cinturon cintuDer;
+    private boolean emergencia;
     /**
      * Creates new form IFrmBotones
      */
-    public IFrmBotones() {
+    public IFrmBotones(IFrmDash dash) {
         initComponents();
+        instanciarAtributos(dash);
+        this.tempDir = new Timer(750, (ActionEvent e) -> {
+            if(dirIzq.isActiva() && !emergencia) {
+                dirIzq.alternarEstado();
+                if (dash.getLblIzquierdaOn().isEnabled()) dash.getLblIzquierdaOn().setEnabled(false);
+                else dash.getLblIzquierdaOn().setEnabled(true);
+            } else if(dirDer.isActiva() && !emergencia) {
+                dirDer.alternarEstado();
+                if (dash.getLblDerechaOn().isEnabled()) dash.getLblDerechaOn().setEnabled(false);
+                else dash.getLblDerechaOn().setEnabled(true);
+            } else if (emergencia) {
+                dirIzq.alternarEstado();
+                if (dash.getLblIzquierdaOn().isEnabled()) dash.getLblIzquierdaOn().setEnabled(false);
+                else dash.getLblIzquierdaOn().setEnabled(true);
+                dirDer.alternarEstado();
+                if (dash.getLblDerechaOn().isEnabled()) dash.getLblDerechaOn().setEnabled(false);
+                else dash.getLblDerechaOn().setEnabled(true);
+            }
+        });
+    }
+    
+    public void instanciarAtributos(IFrmDash dash) {
+        this.dash = dash;
+        this.dirIzq = new LuzIntermitente();
+        this.dirDer = new LuzIntermitente();
+        this.luz = new LuzCarro();
+        this.cintuIzq = new Cinturon();
+        this.cintuDer = new Cinturon();
     }
 
     /**
@@ -92,7 +133,7 @@ public class IFrmBotones extends javax.swing.JInternalFrame {
         });
 
         btnLuz.setBackground(new java.awt.Color(153, 153, 153));
-        btnLuz.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/light.png"))); // NOI18N
+        btnLuz.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/parking-lights.png"))); // NOI18N
         btnLuz.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLuzActionPerformed(evt);
@@ -104,47 +145,50 @@ public class IFrmBotones extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btnBaja, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                    .addComponent(btnCinIzq, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnDirIzq, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(77, 77, 77)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnEmer, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLuz, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnCinDer, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                    .addComponent(btnAlta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnDirDer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(37, 37, 37))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnLuz, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEmer, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(btnCinIzq, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(btnCinDer, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(btnDirIzq, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(btnDirDer, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(btnAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnBaja, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnEmer, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnDirIzq, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnDirDer, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(54, 54, 54)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnBaja, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnLuz, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                                .addComponent(btnCinIzq, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnCinDer, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(28, 28, 28))))
+                    .addComponent(btnDirIzq, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDirDer, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnLuz, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEmer, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBaja, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnCinIzq, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCinDer, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 17, Short.MAX_VALUE))
         );
 
         pack();
@@ -162,25 +206,44 @@ public class IFrmBotones extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCinIzqActionPerformed
 
     private void btnDirIzqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDirIzqActionPerformed
-if (!freno.isActivo()) {
-            freno.activar();
-            lblParking.setEnabled(true);
+        if (!dirIzq.isActiva()) {
+            if (dirDer.isActiva()) {
+                dirDer.desactivar();
+                dash.getLblDerechaOn().setEnabled(false);
+            }
+            dirIzq.activar();
+            dash.getLblIzquierdaOn().setEnabled(true);
+            tempDir.stop();
+            tempDir.start();
         } else {
-            freno.desactivar();
-            lblParking.setEnabled(false);
+            dirIzq.desactivar();
+            dash.getLblIzquierdaOn().setEnabled(false);
+            tempDir.stop();
         }
-        // TODO add your handling code here:
     }//GEN-LAST:event_btnDirIzqActionPerformed
 
     private void btnEmerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmerActionPerformed
-       if (!freno.isActivo()) {
-            freno.activar();
-            lblParking.setEnabled(true);
+        if (!emergencia) {
+            this.emergencia = true;
+            dirDer.desactivar();
+            dash.getLblDerechaOn().setEnabled(false);
+            dirIzq.desactivar();
+            dash.getLblIzquierdaOn().setEnabled(false);
+            
+            dirIzq.activar();
+            dash.getLblIzquierdaOn().setEnabled(true);
+            dirDer.activar();
+            dash.getLblDerechaOn().setEnabled(true);
+            tempDir.stop();
+            tempDir.start();
         } else {
-            freno.desactivar();
-            lblParking.setEnabled(false);
+            this.emergencia = false;
+            dirIzq.desactivar();
+            dash.getLblIzquierdaOn().setEnabled(false);
+            dirDer.desactivar();
+            dash.getLblDerechaOn().setEnabled(false);
+            tempDir.stop();
         }
-        // TODO add your handling code here:
     }//GEN-LAST:event_btnEmerActionPerformed
 
     private void btnBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajaActionPerformed
@@ -202,7 +265,6 @@ if (!freno.isActivo()) {
             freno.desactivar();
             lblParking.setEnabled(false);
         }
-        // TODO add your handling code here:
     }//GEN-LAST:event_btnLuzActionPerformed
 
     private void btnAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaActionPerformed
@@ -217,14 +279,20 @@ if (!freno.isActivo()) {
     }//GEN-LAST:event_btnAltaActionPerformed
 
     private void btnDirDerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDirDerActionPerformed
-       if (!freno.isActivo()) {
-            freno.activar();
-            lblParking.setEnabled(true);
+        if (!dirDer.isActiva()) {
+            if (dirIzq.isActiva()) {
+                dirIzq.desactivar();
+                dash.getLblIzquierdaOn().setEnabled(false);
+            }
+            dirDer.activar();
+            dash.getLblDerechaOn().setEnabled(true);
+            tempDir.stop();
+            tempDir.start();
         } else {
-            freno.desactivar();
-            lblParking.setEnabled(false);
+            dirDer.desactivar();
+            dash.getLblDerechaOn().setEnabled(false);
+            tempDir.stop();
         }
-        // TODO add your handling code here:
     }//GEN-LAST:event_btnDirDerActionPerformed
 
     private void btnCinDerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCinDerActionPerformed
