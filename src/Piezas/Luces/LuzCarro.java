@@ -11,6 +11,7 @@ package Piezas.Luces;
 public class LuzCarro extends Luz {
     
     private boolean intensidadLuz;
+    private boolean activa;
 
     public boolean isIntensidadLuz() {
         return intensidadLuz;
@@ -18,6 +19,19 @@ public class LuzCarro extends Luz {
 
     public LuzCarro() {
         this.intensidadLuz = false;
+        this.activa = false;
+    }
+
+    public boolean isActiva() {
+        return activa;
+    }
+    
+    public void activar() {
+        this.activa = true;
+    }
+    
+    public void desactivar() {
+        this.activa = false;
     }
     
     public void cambiarIntensidad(){

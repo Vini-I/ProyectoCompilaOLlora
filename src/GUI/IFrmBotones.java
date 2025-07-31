@@ -28,6 +28,7 @@ public class IFrmBotones extends javax.swing.JInternalFrame {
      */
     public IFrmBotones(IFrmDash dash) {
         initComponents();
+        tglBtnBaja.setSelected(true);
         instanciarAtributos(dash);
         this.tempDir = new Timer(750, (ActionEvent e) -> {
             if(dirIzq.isActiva() && !emergencia) {
@@ -68,35 +69,19 @@ public class IFrmBotones extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         btnDirIzq = new javax.swing.JButton();
-        btnAlta = new javax.swing.JButton();
-        btnBaja = new javax.swing.JButton();
         btnCinIzq = new javax.swing.JButton();
         btnDirDer = new javax.swing.JButton();
         btnCinDer = new javax.swing.JButton();
         btnEmer = new javax.swing.JButton();
-        btnLuz = new javax.swing.JButton();
+        tglBtnAlta = new javax.swing.JToggleButton();
+        tglBtnBaja = new javax.swing.JToggleButton();
+        jToggleButton1 = new javax.swing.JToggleButton();
 
         btnDirIzq.setBackground(new java.awt.Color(153, 153, 153));
         btnDirIzq.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/left-arrow.png"))); // NOI18N
         btnDirIzq.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDirIzqActionPerformed(evt);
-            }
-        });
-
-        btnAlta.setBackground(new java.awt.Color(153, 153, 153));
-        btnAlta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/car-lights (1).png"))); // NOI18N
-        btnAlta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAltaActionPerformed(evt);
-            }
-        });
-
-        btnBaja.setBackground(new java.awt.Color(153, 153, 153));
-        btnBaja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/car-lights.png"))); // NOI18N
-        btnBaja.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBajaActionPerformed(evt);
             }
         });
 
@@ -132,11 +117,27 @@ public class IFrmBotones extends javax.swing.JInternalFrame {
             }
         });
 
-        btnLuz.setBackground(new java.awt.Color(153, 153, 153));
-        btnLuz.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/parking-lights.png"))); // NOI18N
-        btnLuz.addActionListener(new java.awt.event.ActionListener() {
+        tglBtnAlta.setBackground(new java.awt.Color(153, 153, 153));
+        tglBtnAlta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/car-lights (1).png"))); // NOI18N
+        tglBtnAlta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLuzActionPerformed(evt);
+                tglBtnAltaActionPerformed(evt);
+            }
+        });
+
+        tglBtnBaja.setBackground(new java.awt.Color(153, 153, 153));
+        tglBtnBaja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/car-lights.png"))); // NOI18N
+        tglBtnBaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tglBtnBajaActionPerformed(evt);
+            }
+        });
+
+        jToggleButton1.setBackground(new java.awt.Color(153, 153, 153));
+        jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/parking-lights.png"))); // NOI18N
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
             }
         });
 
@@ -148,47 +149,44 @@ public class IFrmBotones extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnLuz, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnEmer, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(btnCinIzq, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btnCinDer, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(btnDirIzq, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btnDirDer, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGap(0, 0, Short.MAX_VALUE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(btnAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnBaja, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnDirIzq, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDirDer, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 2, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(tglBtnAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tglBtnBaja, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnCinIzq, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCinDer, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnDirIzq, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDirDer, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnLuz, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEmer, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBaja, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnEmer, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(tglBtnAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tglBtnBaja, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCinIzq, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCinDer, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 17, Short.MAX_VALUE))
+                .addGap(52, 52, 52))
         );
 
         pack();
@@ -246,38 +244,6 @@ public class IFrmBotones extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnEmerActionPerformed
 
-    private void btnBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajaActionPerformed
-       if (!freno.isActivo()) {
-            freno.activar();
-            lblParking.setEnabled(true);
-        } else {
-            freno.desactivar();
-            lblParking.setEnabled(false);
-        }
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnBajaActionPerformed
-
-    private void btnLuzActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuzActionPerformed
-       if (!freno.isActivo()) {
-            freno.activar();
-            lblParking.setEnabled(true);
-        } else {
-            freno.desactivar();
-            lblParking.setEnabled(false);
-        }
-    }//GEN-LAST:event_btnLuzActionPerformed
-
-    private void btnAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaActionPerformed
-       if (!freno.isActivo()) {
-            freno.activar();
-            lblParking.setEnabled(true);
-        } else {
-            freno.desactivar();
-            lblParking.setEnabled(false);
-        }
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAltaActionPerformed
-
     private void btnDirDerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDirDerActionPerformed
         if (!dirDer.isActiva()) {
             if (dirIzq.isActiva()) {
@@ -306,15 +272,49 @@ public class IFrmBotones extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCinDerActionPerformed
 
+    private void tglBtnAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tglBtnAltaActionPerformed
+        if (!luz.isIntensidadLuz()) {
+            tglBtnBaja.setSelected(false);
+            luz.cambiarIntensidad();
+            if (luz.isActiva()) {
+                dash.getLblLuzBaja().setEnabled(false);
+                dash.getLblLuzAlta().setEnabled(true);
+            }
+        }
+    }//GEN-LAST:event_tglBtnAltaActionPerformed
+
+    private void tglBtnBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tglBtnBajaActionPerformed
+        if (luz.isIntensidadLuz()) {
+            tglBtnAlta.setSelected(false);
+            luz.cambiarIntensidad();
+            if (luz.isActiva()) {
+                dash.getLblLuzAlta().setEnabled(false);
+                dash.getLblLuzBaja().setEnabled(true);
+            }
+        }
+    }//GEN-LAST:event_tglBtnBajaActionPerformed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        if (!luz.isActiva()) {
+            luz.activar();
+            if (!luz.isIntensidadLuz()) dash.getLblLuzBaja().setEnabled(true);
+            else dash.getLblLuzAlta().setEnabled(true);
+        } else {
+            luz.desactivar();
+            if (!luz.isIntensidadLuz()) dash.getLblLuzBaja().setEnabled(false);
+            else dash.getLblLuzAlta().setEnabled(false);
+        }
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAlta;
-    private javax.swing.JButton btnBaja;
     private javax.swing.JButton btnCinDer;
     private javax.swing.JButton btnCinIzq;
     private javax.swing.JButton btnDirDer;
     private javax.swing.JButton btnDirIzq;
     private javax.swing.JButton btnEmer;
-    private javax.swing.JButton btnLuz;
+    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JToggleButton tglBtnAlta;
+    private javax.swing.JToggleButton tglBtnBaja;
     // End of variables declaration//GEN-END:variables
 }
