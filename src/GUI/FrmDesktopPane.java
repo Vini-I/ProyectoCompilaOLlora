@@ -52,19 +52,15 @@ public class FrmDesktopPane extends javax.swing.JFrame {
         
         Base.add(puerta);
         puerta.setVisible(true);
-        puerta.setLocation(0, Base.getHeight() - puerta.getHeight());
 
         Base.add(dash);
         dash.setVisible(true);
-        dash.setLocation(puerta.getX() + puerta.getWidth(), Base.getHeight() - dash.getHeight());
         
         Base.add(reversa);
         reversa.setVisible(true);
-        reversa.setLocation(dash.getX() + dash.getWidth(), Base.getHeight() - reversa.getHeight());
         
         Base.add(radio);
         radio.setVisible(true);
-        radio.setLocation(reversa.getX() + reversa.getWidth(), Base.getHeight() - radio.getHeight());
         
         Base.add(controles);
         controles.setVisible(true);
