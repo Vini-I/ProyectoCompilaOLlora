@@ -35,8 +35,6 @@ public class FrmDesktopPane extends javax.swing.JFrame {
             Rectangle bounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
             setMaximizedBounds(bounds);
             setExtendedState(JFrame.MAXIMIZED_BOTH);
-            Base.add(parabrisas);
-            parabrisas.setVisible(true);
 
             Base.setPreferredSize(new Dimension(bounds.width, bounds.height));
             Base.setBounds(0, 0, bounds.width, bounds.height);
@@ -69,6 +67,9 @@ public class FrmDesktopPane extends javax.swing.JFrame {
         
         Base.add(controles);
         controles.setVisible(true);
+        
+        Base.add(parabrisas);
+            parabrisas.setVisible(true);
     }
 
     /**
