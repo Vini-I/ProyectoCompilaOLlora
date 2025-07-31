@@ -68,38 +68,14 @@ public class IFrmBotones extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnDirIzq = new javax.swing.JButton();
-        btnDirDer = new javax.swing.JButton();
-        btnEmer = new javax.swing.JButton();
         tglBtnAlta = new javax.swing.JToggleButton();
         tglBtnBaja = new javax.swing.JToggleButton();
         tglBtnLuces = new javax.swing.JToggleButton();
         tglBtnLeftSeat = new javax.swing.JToggleButton();
         tglBtnRightSeat = new javax.swing.JToggleButton();
-
-        btnDirIzq.setBackground(new java.awt.Color(153, 153, 153));
-        btnDirIzq.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/left-arrow.png"))); // NOI18N
-        btnDirIzq.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDirIzqActionPerformed(evt);
-            }
-        });
-
-        btnDirDer.setBackground(new java.awt.Color(153, 153, 153));
-        btnDirDer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/right-arrow.png"))); // NOI18N
-        btnDirDer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDirDerActionPerformed(evt);
-            }
-        });
-
-        btnEmer.setBackground(new java.awt.Color(153, 153, 153));
-        btnEmer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/emergency.png"))); // NOI18N
-        btnEmer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEmerActionPerformed(evt);
-            }
-        });
+        tglBtnDirIzq = new javax.swing.JToggleButton();
+        tglBtnDirDer = new javax.swing.JToggleButton();
+        tglBtnEmer = new javax.swing.JToggleButton();
 
         tglBtnAlta.setBackground(new java.awt.Color(153, 153, 153));
         tglBtnAlta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/car-lights (1).png"))); // NOI18N
@@ -141,44 +117,70 @@ public class IFrmBotones extends javax.swing.JInternalFrame {
             }
         });
 
+        tglBtnDirIzq.setBackground(new java.awt.Color(153, 153, 153));
+        tglBtnDirIzq.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/left-arrow.png"))); // NOI18N
+        tglBtnDirIzq.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tglBtnDirIzqActionPerformed(evt);
+            }
+        });
+
+        tglBtnDirDer.setBackground(new java.awt.Color(153, 153, 153));
+        tglBtnDirDer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/right-arrow.png"))); // NOI18N
+        tglBtnDirDer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tglBtnDirDerActionPerformed(evt);
+            }
+        });
+
+        tglBtnEmer.setBackground(new java.awt.Color(153, 153, 153));
+        tglBtnEmer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/emergency.png"))); // NOI18N
+        tglBtnEmer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tglBtnEmerActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(tglBtnLuces, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEmer, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(tglBtnAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(tglBtnBaja, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnDirIzq, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tglBtnLuces, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                            .addComponent(tglBtnDirIzq, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addComponent(btnDirDer, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 2, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(tglBtnLeftSeat, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(tglBtnRightSeat, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tglBtnDirDer, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                            .addComponent(tglBtnEmer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tglBtnAlta, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                            .addComponent(tglBtnLeftSeat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(1, 1, 1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(tglBtnBaja, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(tglBtnRightSeat, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnDirIzq, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDirDer, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnEmer, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tglBtnLuces, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tglBtnDirIzq, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tglBtnDirDer, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tglBtnLuces, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tglBtnEmer, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(tglBtnAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tglBtnBaja, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -191,64 +193,6 @@ public class IFrmBotones extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnDirIzqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDirIzqActionPerformed
-        if (!dirIzq.isActiva()) {
-            if (dirDer.isActiva()) {
-                dirDer.desactivar();
-                dash.getLblDerechaOn().setEnabled(false);
-            }
-            dirIzq.activar();
-            dash.getLblIzquierdaOn().setEnabled(true);
-            tempDir.stop();
-            tempDir.start();
-        } else {
-            dirIzq.desactivar();
-            dash.getLblIzquierdaOn().setEnabled(false);
-            tempDir.stop();
-        }
-    }//GEN-LAST:event_btnDirIzqActionPerformed
-
-    private void btnEmerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmerActionPerformed
-        if (!emergencia) {
-            this.emergencia = true;
-            dirDer.desactivar();
-            dash.getLblDerechaOn().setEnabled(false);
-            dirIzq.desactivar();
-            dash.getLblIzquierdaOn().setEnabled(false);
-            
-            dirIzq.activar();
-            dash.getLblIzquierdaOn().setEnabled(true);
-            dirDer.activar();
-            dash.getLblDerechaOn().setEnabled(true);
-            tempDir.stop();
-            tempDir.start();
-        } else {
-            this.emergencia = false;
-            dirIzq.desactivar();
-            dash.getLblIzquierdaOn().setEnabled(false);
-            dirDer.desactivar();
-            dash.getLblDerechaOn().setEnabled(false);
-            tempDir.stop();
-        }
-    }//GEN-LAST:event_btnEmerActionPerformed
-
-    private void btnDirDerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDirDerActionPerformed
-        if (!dirDer.isActiva()) {
-            if (dirIzq.isActiva()) {
-                dirIzq.desactivar();
-                dash.getLblIzquierdaOn().setEnabled(false);
-            }
-            dirDer.activar();
-            dash.getLblDerechaOn().setEnabled(true);
-            tempDir.stop();
-            tempDir.start();
-        } else {
-            dirDer.desactivar();
-            dash.getLblDerechaOn().setEnabled(false);
-            tempDir.stop();
-        }
-    }//GEN-LAST:event_btnDirDerActionPerformed
 
     private void tglBtnAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tglBtnAltaActionPerformed
         if (!luz.isIntensidadLuz()) {
@@ -304,13 +248,91 @@ public class IFrmBotones extends javax.swing.JInternalFrame {
        }
     }//GEN-LAST:event_tglBtnRightSeatActionPerformed
 
+    public void desactivarDirIzq() {
+        dirIzq.desactivar();
+        dash.getLblIzquierdaOn().setEnabled(false);
+    }
+    
+    public void desactivarDirDer() {
+        dirDer.desactivar();
+        dash.getLblDerechaOn().setEnabled(false);
+    }
+    
+    public void activarDirIzq() {
+        dirIzq.activar();
+        dash.getLblIzquierdaOn().setEnabled(true);
+    }
+    
+    public void activarDirDer() {
+        dirDer.activar();
+        dash.getLblDerechaOn().setEnabled(true);
+    }
+    
+    private void tglBtnDirIzqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tglBtnDirIzqActionPerformed
+        if (!dirIzq.isActiva() && !emergencia) {
+            tempDir.stop();
+            if (dirDer.isActiva()) {
+                desactivarDirDer();
+                tglBtnDirDer.setSelected(false);
+            }
+            activarDirIzq();
+            tempDir.start();
+        } else if (emergencia) {
+            desactivarDirDer();
+            this.emergencia = false;
+            tglBtnEmer.setSelected(false);
+        } else {
+            desactivarDirIzq();
+            tempDir.stop();
+        }
+    }//GEN-LAST:event_tglBtnDirIzqActionPerformed
+
+    private void tglBtnDirDerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tglBtnDirDerActionPerformed
+        if (!dirDer.isActiva() && !emergencia) {
+            tempDir.stop();
+            if (dirIzq.isActiva()) {
+                desactivarDirIzq();
+                tglBtnDirIzq.setSelected(false);
+            } 
+            activarDirDer();
+            tempDir.start();
+        } else if (emergencia) {
+            desactivarDirIzq();
+            this.emergencia = false;
+            tglBtnEmer.setSelected(false);
+        } else {
+            desactivarDirDer();
+            tempDir.stop();
+        }
+    }//GEN-LAST:event_tglBtnDirDerActionPerformed
+
+    private void tglBtnEmerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tglBtnEmerActionPerformed
+        if (!emergencia) {
+            this.emergencia = true;
+            desactivarDirDer();
+            tglBtnDirDer.setSelected(false);
+            desactivarDirIzq();
+            tglBtnDirIzq.setSelected(false);
+            
+            activarDirIzq();
+            activarDirDer();
+            tempDir.stop();
+            tempDir.start();
+        } else {
+            this.emergencia = false;
+            desactivarDirIzq();
+            desactivarDirDer();
+            tempDir.stop();
+        }
+    }//GEN-LAST:event_tglBtnEmerActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnDirDer;
-    private javax.swing.JButton btnDirIzq;
-    private javax.swing.JButton btnEmer;
     private javax.swing.JToggleButton tglBtnAlta;
     private javax.swing.JToggleButton tglBtnBaja;
+    private javax.swing.JToggleButton tglBtnDirDer;
+    private javax.swing.JToggleButton tglBtnDirIzq;
+    private javax.swing.JToggleButton tglBtnEmer;
     private javax.swing.JToggleButton tglBtnLeftSeat;
     private javax.swing.JToggleButton tglBtnLuces;
     private javax.swing.JToggleButton tglBtnRightSeat;
